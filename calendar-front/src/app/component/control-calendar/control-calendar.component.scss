@@ -1,0 +1,36 @@
+@import '../../../theme/function';
+
+.control-calendar {
+  height: vw(100);
+  display: flex;
+  margin-bottom: 30px;
+  opacity: 0.5;
+  .display-container {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .date-wrapper {
+      font-size: vw(30);
+      font-weight: 500;
+      margin-left: vw(80);
+      margin-right: vw(80);
+    }
+    mat-icon {
+      @include md-icon-size(40px);
+    }
+  }
+  .toggle-container {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .mat-button-toggle-group {
+      width: 50%;
+      border: 2px solid #000000;
+      .mat-button-toggle {
+        width: 50%;
+      }
+    }
+  }
+}

@@ -1,0 +1,131 @@
+@import '../../../theme/function';
+
+.month-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .top-display-wrapper {
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    span:first-child {
+      color: #ff425e;
+    }
+    span {
+      width: calc(100% / 7);
+      font-size: 14px;
+      text-align: center;
+    }
+    span:last-child {
+      color: #138cfe;
+    }
+  }
+  .month-wrapper {
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #e0e0e0;
+    .day-panel {
+      width: calc(100% / 7);
+      height: vw(120);
+      box-sizing: border-box;
+      padding-top: 10px;
+      padding-left: 10px;
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      .events-area {
+        margin-top: vw(5);
+        .event-title {
+          display: flex;
+          align-items: center;
+          margin: 0;
+          font-size: vw(16);
+          i.material-icons {
+            font-size: vw(12);
+            margin-right: vw(4);
+          }
+        }
+
+      }
+    }
+  }
+}
+
+.week-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .top-display-wrapper {
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    margin-left: calc(100%/8);
+    span:first-child {
+      color: #ff425e;
+    }
+    span {
+      width: calc(100% / 8);
+      font-size: 14px;
+      text-align: center;
+    }
+    span:last-child {
+      color: #138cfe;
+    }
+  }
+
+  .week-wrapper {
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    flex-wrap: wrap;
+    .hour-display-panel {
+      display: flex;
+      flex-direction: column;
+      .hour-display-item {
+        width: vw(120);
+        height: vw(120);
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+        padding-top: vw(10);
+        border: 1px solid #e0e0e0;
+        color: lightslategray;
+      }
+    }
+    .hour-panel {
+      width: calc(100% / 8);
+      height: vw(120);
+      box-sizing: border-box;
+      padding-top: 10px;
+      padding-left: 10px;
+      background-color: #ffffff;
+      border: 1px solid #e0e0e0;
+      .events-area {
+        margin-top: vw(5);
+        .event-title {
+          display: flex;
+          align-items: center;
+          margin: 0;
+          font-size: vw(16);
+          i.material-icons {
+            font-size: vw(12);
+            margin-right: vw(4);
+          }
+        }
+
+      }
+    }
+  }
+
+
+}
+

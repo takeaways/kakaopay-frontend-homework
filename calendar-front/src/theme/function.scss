@@ -1,0 +1,16 @@
+@function vw($px) {
+  @return ($px/1680)*100vw;
+}
+
+
+//set mat-icon size
+@mixin md-icon-size($size: 24px) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+  line-height: $size;
+}
+
+mat-icon {
+  @include md-icon-size(32px);
+}

@@ -1,0 +1,24 @@
+<div class="control-calendar">
+  <div class="display-container">
+    <button mat-icon-button
+            (click)="prevClicked()">
+      <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+    <div class="date-wrapper">
+      <span>{{calendarService.getShowDate().year()}}</span>년
+      <span>{{calendarService.getShowDate().month() + 1}}</span>월
+    </div>
+    <button mat-icon-button
+            (click)="nextClicked()">
+      <mat-icon>arrow_forward_ios</mat-icon>
+    </button>
+  </div>
+  <div class="toggle-container">
+    <mat-button-toggle-group #group="matButtonToggleGroup" value="{{calendarService.getToggleValue()}}">
+      <mat-button-toggle (click)="toggleMonthWeek('month')"
+                         value="month">월</mat-button-toggle>
+      <mat-button-toggle (click)="toggleMonthWeek('week')"
+                         value="week">주</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</div>

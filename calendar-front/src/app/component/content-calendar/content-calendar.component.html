@@ -1,0 +1,70 @@
+<div class="month-container"
+     *ngIf="toggleValue === 'month'">
+  <div class="top-display-wrapper">
+    <span>일</span>
+    <span>월</span>
+    <span>화</span>
+    <span>수</span>
+    <span>목</span>
+    <span>금</span>
+    <span>토</span>
+  </div>
+  <div class="month-wrapper">
+    <div class="day-panel"
+         *ngFor="let dayItem of days; let i = index;">
+      <div> {{ dayItem.day }}</div>
+      <div class="events-area"
+           *ngFor="let event of dayItem.events; let i = index;">
+        <p class="event-title"><i class="material-icons">panorama_fish_eye</i>{{event}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="week-container"
+     *ngIf="toggleValue === 'week'">
+  <div class="top-display-wrapper">
+    <span>일</span>
+    <span>월</span>
+    <span>화</span>
+    <span>수</span>
+    <span>목</span>
+    <span>금</span>
+    <span>토</span>
+  </div>
+  <div class="week-wrapper">
+    <div class="hour-display-panel">
+      <div class="hour-display-item">오전 08:00</div>
+      <div class="hour-display-item">오전 09:00</div>
+      <div class="hour-display-item">오전 10:00</div>
+      <div class="hour-display-item">오전 11:00</div>
+      <div class="hour-display-item">오후 12:00</div>
+      <div class="hour-display-item">오후 01:00</div>
+      <div class="hour-display-item">오후 02:00</div>
+      <div class="hour-display-item">오후 03:00</div>
+      <div class="hour-display-item">오후 04:00</div>
+      <div class="hour-display-item">오후 05:00</div>
+      <div class="hour-display-item">오후 06:00</div>
+      <div class="hour-display-item">오후 07:00</div>
+      <div class="hour-display-item">오후 08:00</div>
+      <div class="hour-display-item">오후 09:00</div>
+      <div class="hour-display-item">오후 10:00</div>
+      <div class="hour-display-item">오후 11:00</div>
+      <div class="hour-display-item">오전 12:00</div>
+      <div class="hour-display-item">오전 01:00</div>
+      <div class="hour-display-item">오전 02:00</div>
+      <div class="hour-display-item">오전 03:00</div>
+      <div class="hour-display-item">오전 04:00</div>
+      <div class="hour-display-item">오전 05:00</div>
+      <div class="hour-display-item">오전 06:00</div>
+      <div class="hour-display-item">오전 07:00</div>
+    </div>
+    <div class="hour-panel"
+         *ngFor="let dayItem of days; let i = index;">
+
+    </div>
+  </div>
+
+</div>
+
+
