@@ -4,9 +4,21 @@
             (click)="prevClicked()">
       <mat-icon>arrow_back_ios</mat-icon>
     </button>
-    <div class="date-wrapper">
-      <span>{{calendarService.getShowDate().year()}}</span>년
-      <span>{{calendarService.getShowDate().month() + 1}}</span>월
+    <div class="date-wrapper"
+         *ngIf="toggleValue === 'month'">
+      <span>{{currentYear}}</span>년
+      <span>{{currentMonth}}</span>월
+    </div>
+
+    <div class="date-wrapper"
+         *ngIf="toggleValue === 'week'">
+      <span>{{currentStartYear}}</span>년
+      <span>{{currentStartMonth}}</span>월
+      <span>{{currentStartWeek}}</span>일 ~
+
+      <span>{{currentEndYear}}</span>년
+      <span>{{currentEndMonth}}</span>월
+      <span>{{currentEndWeek}}</span>일
     </div>
     <button mat-icon-button
             (click)="nextClicked()">

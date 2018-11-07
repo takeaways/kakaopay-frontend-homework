@@ -68,8 +68,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
-    margin-left: calc(100%/8);
-    span:first-child {
+    span:nth-child(2) {
       color: #ff425e;
     }
     span {
@@ -82,50 +81,48 @@
     }
   }
 
-  .week-wrapper {
-    width: 100%;
-    background: #ffffff;
+  .week-hour-wrapper {
     display: flex;
-    flex-wrap: wrap;
-    .hour-display-panel {
+    flex-direction: row;
+    .week-panel {
       display: flex;
-      flex-direction: column;
-      .hour-display-item {
-        width: vw(120);
-        height: vw(120);
+      background: #ffffff;
+      .hour-display-area {
         display: flex;
-        justify-content: center;
-        box-sizing: border-box;
-        padding-top: vw(10);
-        border: 1px solid #e0e0e0;
-        color: lightslategray;
+        flex-direction: column;
+        .hour-display-item {
+          width: vw(199.8);
+          height: vw(120);
+          display: flex;
+          justify-content: center;
+          box-sizing: border-box;
+          padding-top: vw(10);
+          border: 1px solid #e0e0e0;
+          color: lightslategray;
+        }
       }
     }
-    .hour-panel {
-      width: calc(100% / 8);
-      height: vw(120);
-      box-sizing: border-box;
-      padding-top: 10px;
-      padding-left: 10px;
-      background-color: #ffffff;
-      border: 1px solid #e0e0e0;
-      .events-area {
-        margin-top: vw(5);
-        .event-title {
-          display: flex;
-          align-items: center;
-          margin: 0;
-          font-size: vw(16);
-          i.material-icons {
-            font-size: vw(12);
-            margin-right: vw(4);
-          }
-        }
 
+    .hour-panel {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      background: #ffffff;
+      .hour-area {
+        display: flex;
+        flex-direction: column;
+        .hour-item {
+          width: vw(198);
+          height: vw(120);
+          display: flex;
+          justify-content: center;
+          box-sizing: border-box;
+          padding-top: vw(10);
+          border: 1px solid #e0e0e0;
+          color: lightslategray;
+        }
       }
     }
   }
-
-
 }
 

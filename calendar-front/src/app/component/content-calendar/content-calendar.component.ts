@@ -1,13 +1,6 @@
 import * as moment from 'moment';
-import {Component, HostBinding, OnInit, SimpleChange} from '@angular/core';
+import {Component, HostBinding, OnInit} from '@angular/core';
 import {CalendarService} from '../../service/calendar.service';
-
-interface CalendarDate {
-  day: number;
-  month: number;
-  year: number;
-  events: any[];
-}
 
 @Component({
   selector: 'app-content-calendar',
@@ -17,7 +10,21 @@ interface CalendarDate {
 
 export class ContentCalendarComponent implements OnInit {
 
-  days: CalendarDate[] = [];
+  days: any = [];
+  /**
+   * days = {
+   *  year: number,
+   *  month: number,
+   *  day: number,
+   *  events: [
+   *    {
+   *      time: moment
+   *      title: string
+   *    }
+   *    ... * 24
+   *  ]
+   * }
+   */
 
   @HostBinding('class.show-date')
   showDate: any;
@@ -40,12 +47,18 @@ export class ContentCalendarComponent implements OnInit {
 
     this.calendarService.dateChanged.subscribe(showDate => {
       this.showDate = showDate;
-      this.generateMonthCalendar();
+      if(this.toggleValue === 'month')
+        this.generateMonthCalendar();
+      else
+        this.generateWeekCalendar();
     });
 
     this.calendarService.toggleChanged.subscribe(toggleValue => {
       this.toggleValue = toggleValue;
-      this.generateWeekCalendar();
+      if(this.toggleValue === 'month')
+        this.generateMonthCalendar();
+      else
+        this.generateWeekCalendar();
     });
   }
 
@@ -54,6 +67,7 @@ export class ContentCalendarComponent implements OnInit {
    *****************************/
 
   generateMonthCalendar() {
+    this.days = [];
     let date = moment(this.showDate);
     let month = date.month();
     let year = date.year();
@@ -65,26 +79,53 @@ export class ContentCalendarComponent implements OnInit {
     }
 
     let lastDate = 7 - (moment(date).endOf('month').day() + 1);
-    let disableCheck = false;
 
-    this.days = [];
     for (let i = n; i <= (date.endOf('month').date() + lastDate); i += 1) {
       let currentDate = moment().set('year', year).set('month', month).set('date', i);
       this.days.push({
         day: currentDate.date(),
         month: currentDate.month(),
         year: currentDate.year(),
-        events: [
-          '오늘은 신나는 회식!',
-          '11:00 클라이언트 미팅',
-          '소미 어린이집 상담'
-        ]
+        events: []
       });
     }
   }
 
   generateWeekCalendar() {
+    this.days = [];
+    var current = moment(this.showDate).startOf('week');
+    //주 별 시작시간으로 초기화
+    current = moment(current.set('hour', 7));
 
+    // set this Week
+    for(let i=0; i < 7; i++) {
+      var array = [];
+      for(let i=0; i < 24; i++) {
+        let temp = {
+          time: moment()
+            .set('year', current.year())
+            .set('month', current.month())
+            .set('date', current.date())
+            .set('hour', current.hour())
+            .set('minute', 0)
+            .set('second', 0)
+            .set('millisecond', 0)
+        };
+        array.push(temp);
+        if(current.get('hours') === 23)
+          current = current.set('date', current.date() - 1).add(1, 'hour')
+        else
+          current = moment(current.add(1, 'hour'));
+      }
+
+      this.days.push({
+        year: current.get('year'),
+        month: current.get('month') + 1,
+        day: current.get('date'),
+        events: array
+      });
+      current = current.add(1, 'day').set('hour', 7);
+    }
   }
 
   /*****************************

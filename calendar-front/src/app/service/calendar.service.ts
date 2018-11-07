@@ -25,6 +25,7 @@ export class CalendarService {
 
   setShowDate(date: any) {
     this.showDate = date;
+    this.dateChanged.emit(this.showDate);
   }
 
   getShowDate() {
