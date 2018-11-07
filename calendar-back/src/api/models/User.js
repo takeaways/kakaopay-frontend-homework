@@ -147,7 +147,6 @@ module.exports = {
     payments: {ref: 'Payment', localField: '_id', foreignField: 'owner'},
     permissions: {ref: 'Permission', localField: '_id', foreignField: 'user'},
     posts: {ref: 'Post', localField: '_id', foreignField: 'owner'},
-    requestLogs: {ref: 'RequestLog', localField: '_id', foreignField: 'owner'},
     stampCollections: {ref: 'StampCollection', localField: '_id', foreignField: 'owner'},
     subscriptions: {ref: 'Subscription', localField: '_id', foreignField: 'owner'},
   },

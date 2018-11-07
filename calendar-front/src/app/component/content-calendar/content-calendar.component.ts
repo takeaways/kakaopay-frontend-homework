@@ -60,6 +60,8 @@ export class ContentCalendarComponent implements OnInit {
       else
         this.generateWeekCalendar();
     });
+
+    this.loadEvent();
   }
 
   /*****************************
@@ -71,8 +73,8 @@ export class ContentCalendarComponent implements OnInit {
     let date = moment(this.showDate);
     let month = date.month();
     let year = date.year();
-    let n: number = 1;
-    let firstWeekDay: number = date.date(2).day();
+    let n = 1;
+    let firstWeekDay = date.date(2).day();
 
     if (firstWeekDay !== 1) {
       n -= (firstWeekDay + 6) % 7;
@@ -133,7 +135,15 @@ export class ContentCalendarComponent implements OnInit {
    *****************************/
 
   loadEvent() {
-
+    return this.calendarService.find({
+      query: {
+        isDeleted: false
+      },
+      sort: {lastUpdatedAt: -1}
+    })
+      .subscribe((result) => {
+        console.log("result::\n", result);
+      })
   }
 
 }

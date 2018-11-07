@@ -8,7 +8,6 @@ let logger = CalendarServer.logger('AuditPolicy');
 module.exports = function (req, res, next) {
   let ipAddress = req.headers['x-forwarded-for'] || (req.connection && req.connection.remoteAddress);
   req.requestId = fnv.hash(new Date().valueOf() + ipAddress, 128).str();
-  req.requestLog = null;
 
   let destinedController;
   let destinedApi;
@@ -26,26 +25,8 @@ module.exports = function (req, res, next) {
         }
       }
     });
-
-  RequestLog.create({
-    ipAddress: ipAddress,
-    url: sanitizeRequestUrl(req),
-    method: req.method,
-    body: _.omit(req.body, 'password'),
-    query: _.omit(req.query, 'password'),
-    params: _.omit(req.params, 'password'),
-    user: (req.user || {})._id,
-    controller: destinedController,
-    api: destinedApi,
-  })
-    .then(function (requestLog) {
-      req.requestLog = requestLog;
-      next();
-    })
-    .catch(function (err) {
-      logger.warn(err);
-      next();
-    });
+	
+	next();
 };
 
 function sanitizeRequestUrl(req) {
