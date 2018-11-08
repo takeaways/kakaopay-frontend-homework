@@ -1,6 +1,5 @@
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserModule }    from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,9 +10,6 @@ import { ContentCalendarComponent } from './component/content-calendar/content-c
 import { MatButtonModule, MatIconModule, MatButtonToggleModule } from '@angular/material';
 import {CalendarService} from './service/calendar.service';
 
-//External
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,12 +19,11 @@ import {CalendarService} from './service/calendar.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
 
     //Angular Material
     MatButtonModule,
     MatIconModule,
-    MatButtonToggleModule,
+    MatButtonToggleModule
   ],
   providers: [
     CalendarService

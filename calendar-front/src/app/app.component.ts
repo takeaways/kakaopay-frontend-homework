@@ -12,6 +12,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.calendarService.setShowDate(moment());
-    this.calendarService.setToggleValue('month');
+    this.calendarService.setToggleValue('week');
   }
 }
