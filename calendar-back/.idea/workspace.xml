@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b1f26491-388c-47c8-b704-0aa8c5bba815" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/app.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/data/100k.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/fonts/data-table.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/fonts/data-table.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/fonts/data-table.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/fonts/data-table.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/icons-reference.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/btn_top.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/device_s7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_arrow_right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_cart_active.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_cart_default.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_checkmark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_checkmark_selectbox.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_color_all.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_color_black.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_color_blue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_color_brown.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_color_gray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_color_green.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_color_grey.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_color_purple.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_color_red.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_color_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_color_yellow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_heart_active.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_heart_default.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_logo_footer.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_logo_full.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_logo_header.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_new.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_setting.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_sns_LinkedIn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_sns_fb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_sns_fb_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_sns_google_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_sns_insta.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_symbol.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/ic_symbol_header.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/img_phone_S7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/0.0.0_splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/1.0.1_main.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/2.0.1_coupon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/3.0.1_menu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/3.0.2_menu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/4.0.1_introduce.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/5.0.1_instagram.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/5.0.1_photo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/5.2.1_photo_allview.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/5.2.2_photo_allview.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/6.0.1_event.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/6.0.2_event_detail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/6.0.3_event_detail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/6.0.4_event_detail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/7.0.1_sideMenu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/Screen Shot 2016-12-02 at 12.34.09 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/Screen Shot 2016-12-02 at 12.34.22 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/Screen Shot 2016-12-02 at 12.34.29 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/Screen Shot 2016-12-02 at 12.34.38 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/Screen Shot 2016-12-02 at 12.34.58 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/Screen Shot 2016-12-02 at 12.35.10 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockimg/Screen Shot 2016-12-02 at 12.35.21 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/img/mockup_S7_new.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/main.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/vendor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/admin/vendor.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/app.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/icons-reference.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/btn_top.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/device_s7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_arrow_right.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_cart_active.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_cart_default.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_checkmark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_checkmark_selectbox.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_color_all.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_color_black.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_color_blue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_color_brown.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_color_gray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_color_green.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_color_grey.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_color_purple.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_color_red.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_color_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_color_yellow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_heart_active.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_heart_default.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_logo_footer.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_logo_full.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_logo_header.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_new.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_setting.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_sns_LinkedIn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_sns_fb.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_sns_fb_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_sns_google_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_sns_insta.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_symbol.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/ic_symbol_header.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/img_phone_S7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/0.0.0_splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/1.0.1_main.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/2.0.1_coupon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/3.0.1_menu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/3.0.2_menu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/4.0.1_introduce.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/5.0.1_instagram.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/5.0.1_photo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/5.2.1_photo_allview.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/5.2.2_photo_allview.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/6.0.1_event.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/6.0.2_event_detail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/6.0.3_event_detail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/6.0.4_event_detail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/7.0.1_sideMenu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/Screen Shot 2016-12-02 at 12.34.09 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/Screen Shot 2016-12-02 at 12.34.22 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/Screen Shot 2016-12-02 at 12.34.29 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/Screen Shot 2016-12-02 at 12.34.38 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/Screen Shot 2016-12-02 at 12.34.58 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/Screen Shot 2016-12-02 at 12.35.10 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockimg/Screen Shot 2016-12-02 at 12.35.21 PM.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/img/mockup_S7_new.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/main.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/vendor.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/controllers/AuthController.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/controllers/EventController.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/controllers/UserController.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/hooks/passport.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/hooks/security.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/models/Event.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/models/Role.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/models/User.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/policies/Admin.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/policies/AuditPolicy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/policies/BearerAuth.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/policies/HasUser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/policies/OwnerPolicy.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/policies/TransactionalRequest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/policies/User.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/badRequest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/conflict.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/forbidden.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/gone.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/internalServer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/loopDetected.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/manyRequest.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/mongooseError.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/notAcceptable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/notFound.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/notImplemented.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/nowAllowed.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/ok.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/payloadTooLarge.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/paymentRequired.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/preconditionFailed.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/requestTimeout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/serviceUnavaliable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/unauthorized.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/responses/unprocessableEntity.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/services/AuthService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/services/EventService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/services/PassportService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/services/protocols/basic.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/services/protocols/bearer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/services/protocols/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/services/protocols/local.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/services/protocols/oauth.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/services/protocols/oauth2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/services/protocols/openid.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/calendarServer/blueprint.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/calendarServer/globals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/calendarServer/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/calendarServer/middlewares/Bind.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/calendarServer/middlewares/RequestLogger.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/calendarServer/middlewares/ServerDomain.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/calendarServer/middlewares/errorHandler.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/calendarServer/middlewares/notFound.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/calendarServer/middlewares/requestParam.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/calendarServer/request/Query.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/data/Event.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/data/Role.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/data/User.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/env/development/connections.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/env/development/cors.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/env/env.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/env/production/connections.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/env/production/cors.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/hooks.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/http.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/log.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/models.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/passport.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/policies/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/responses.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/routes/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/routes/servers.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/security.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/sessions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/TytNucAVxVObu94iVL-_TaJX.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calendar-front/src/app/component/content-calendar/content-calendar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../calendar-front/src/app/component/content-calendar/content-calendar.component.ts" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="644" />
+    <option name="y" value="23" />
+    <option name="width" value="934" />
+    <option name="height" value="1057" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.prettier" value="true" />
+    <property name="node.js.path.for.package.prettier" value="project" />
+    <property name="node.js.selected.package.prettier" value="" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b1f26491-388c-47c8-b704-0aa8c5bba815" name="Default" comment="" />
+      <created>1541690235428</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1541690235428</updated>
+      <workItem from="1541690236570" duration="11000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="11000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="644" y="23" width="934" height="1057" extended-state="0" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24972618" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+</project>

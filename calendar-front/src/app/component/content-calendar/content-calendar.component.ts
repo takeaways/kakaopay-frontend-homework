@@ -13,6 +13,8 @@ export class ContentCalendarComponent implements OnInit {
   days: any = [];
   /**
    * days = {
+   *  * year, month, day : 달력에 이벤트를 표시하기 위한 값들
+   *  * events : 사용자가 보는 현재의 달력(이번달, 이번주)에 등록된 이벤트
    *  year: number,
    *  month: number,
    *  day: number,
@@ -136,10 +138,10 @@ export class ContentCalendarComponent implements OnInit {
 
   loadEvent() {
     return this.calendarService.find({
-      query: {
-        isDeleted: false
-      },
-      sort: {lastUpdatedAt: -1}
+      // query: {
+      //   isDeleted: false
+      // },
+      // sort: {lastUpdatedAt: -1}
     })
       .subscribe((result) => {
         console.log("result::\n", result);
