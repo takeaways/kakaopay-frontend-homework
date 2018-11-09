@@ -26,10 +26,6 @@ module.exports = {
 };
 
 function init() {
-  iamport = require('iamport')({
-    impKey: Bifido.config.connections.iamport.impKey,
-    impSecret: Bifido.config.connections.iamport.impSecret
-  });
 }
 
 function check(paymentId) {
