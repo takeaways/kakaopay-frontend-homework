@@ -1,0 +1,28 @@
+비피도 고객센터로 발송된 문의사항입니다.
+----------
+비피도 고객센터로 발송된 문의사항입니다.
+
+<%= date %>에 <%= email %>님이 문의하신 질문입니다.
+
+<%= content %>
+
+html:
+<div style="font-family: sans-serif, arial; font-weight: 400; margin: 0; padding: 0;">
+
+   <!-- mail-header -->
+   <img style="width: 100%; display: block" src="https://s3.ap-northeast-2.amazonaws.com/public.bifido-officail.com/bifido_mail_header.png"/>
+   <!-- // mail-header -->
+
+   <!-- mail-body -->
+   <div style="padding: 0 50px; font-size: 16px">
+     <h2 style="margin: 0; font-size: 24px; font-weight: bold">비피도 고객센터로 발송된 문의사항입니다.</h2><br />
+     <p style="margin: 0;"><%= date %>에 문의된 내용입니다.</p><br />
+     <p style="margin: 0;"><%= content %></p>
+   </div>
+   <!-- // mail-body -->
+
+   <!-- mail-footer -->
+   <img style="width: 100%; display: block" src="https://s3.ap-northeast-2.amazonaws.com/public.bifido-officail.com/bifido_mail_footer.png"/>
+   <!-- // mail-footer -->
+
+</div>

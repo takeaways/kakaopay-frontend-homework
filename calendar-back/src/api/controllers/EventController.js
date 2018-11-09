@@ -1,44 +1,31 @@
 'use strict';
 
-let logger = CalendarServer.logger('EventController');
+/**
+ * Created by sungwookim on 27/02/2018
+ * As part of bifidoServer
+ *
+ * Copyright (C) Applicat (www.applicat.co.kr) - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by sungwookim <ksw1652@gmail.com>, 27/02/2018
+ *
+ * Updater    수정자 - 작성자이름 27/02/2018
+ */
+
+let logger = Bifido.logger('EventController');
 let moment = require('moment');
 
 module.exports = {
-  // public
-  findForOrderStatus: findForOrderStatus,
+  // public (서버)
   count: count,
   find: find,
   findOne: findOne,
 
-  // 앱젯 사용자 (서버)
+  // 앱젯 사용자 주인
   create: create,
   update: update,
   remove: remove,
 };
-
-
-function findForOrderStatus(req, res) {
-  let params = QueryService.buildQuery(req);
-  params.ids = req.query.ids;
-
-  params.query.startDate = {"$lt": moment().format()};
-  let countPromise = Event.count(params.query);
-
-  Promise.all([EventService.orderStatus(params), countPromise])
-    .spread(function (events, count) {
-      ++params.limit;
-      // See if there's more
-      let more = (events[params.limit - 1]) ? true : false;
-      // Remove item over 20 (only for check purpose)
-      if (more) events.splice(params.limit - 1, 1);
-
-      return res.ok({events: events, more: more, total: count});
-    })
-    .catch(function (err) {
-      logger.log('error', err);
-      return res.internalServer();
-    });
-}
 
 function count(req, res) {
   req.buildQuery()
@@ -67,23 +54,31 @@ function find(req, res) {
     .then((_params) => {
       params = _params;
 
-      // Find
-      let queryPromise = Event.find(params.query);
+      let queryPromise;
+      
+	    if(params.mode === 'month') {
+		    //TODO: mode === 'month'이면 showDate 기준으로 월의 1일 부터 마지막 날까지 쿼링
+	    	params.query.startTime = {
+	    		"$gte": moment(params.query.showDate).startOf('month').toDate(),
+			    "$lte": moment(params.query.showDate).endOf('month').toDate()
+		    }
+	    } else {
+		    //TODO: mode === 'week'이면 showDate 기준으로 주의 첫째 날 부터 마지막 날까지 쿼링
+		    params.query.startTime = {
+			    $gte: moment(params.query.showDate).startOf('week').toDate(),
+			    $lte: moment(params.query.showDate).endOf('week').toDate()
+		    }
+	    }
+	    
+	    delete params.query.mode;
+	    delete params.query.showDate;
+	
+	    queryPromise = Event.find(params.query);
 
-      EventService.setQueryOptions(queryPromise, params);
-
-      // Count
-      let countPromise = Event.count(params.query);
-
-      return Promise.all([queryPromise, countPromise]);
+      return queryPromise;
     })
-    .spread(function (events, count) {
-      // See if there's more
-      let more = (events[params.limit - 1]) ? true : false;
-      // Remove item over 20 (only for check purpose)
-      if (more) events.splice(params.limit - 1, 1);
-
-      return res.ok({events: events, more: more, total: count});
+    .then(function (events) {
+      return res.ok({events: events});
     })
     .catch(function (err) {
       if (err.message === 'InvalidParameter')
@@ -101,16 +96,6 @@ function findOne(req, res) {
   req.buildQuery()
     .then((params) => {
       let queryPromise = Event.findOne(params.query);
-
-      // Populate
-      if (params.populate) {
-        if (Array.isArray(params.populate))
-          _.forEach(params.populate, function (populate) {
-            queryPromise = queryPromise.populate(populate);
-          });
-        else
-          queryPromise = queryPromise.populate(params.populate);
-      }
 
       return queryPromise;
     })
@@ -133,24 +118,19 @@ function findOne(req, res) {
 
 
 function create(req, res) {
-  req.getParams(["title"])
-    .then((event) => {
-      event.createdBy = req.user._id;
-      event.updatedBy = req.user._id;
-      event.owner = req.user._id;
+  let event;
+  req.getParams(["title", "startTime"])
+    .then((_event) => {
+      event = _event;
 
-      event.category = req.body.category;
-      event.title = req.body.title;
-      event.contentHtml = req.body.contentHtml;
-      event.startDate = req.body.startDate;
-      event.endDate = req.body.endDate;
-      event.notification = req.body.notification;
-      event.photos = req.body.photos;
+      // event.createdBy = req.user._id;
+      // event.updatedBy = req.user._id;
+      // event.owner = req.user._id;
 
       return Event.create(event);
     })
-    .then(function (event) {
-      return res.ok({event: event})
+    .then((event) => {
+      res.ok({event: event});
     })
     .catch(function (err) {
       if (err.message === 'InvalidParameter')
@@ -164,6 +144,7 @@ function create(req, res) {
     });
 }
 
+
 function update(req, res) {
   req.getParams("_id")
     .then((query) => {
@@ -175,25 +156,22 @@ function update(req, res) {
       event.lastUpdatedAt = new Date();
       event.updatedBy = req.user._id;
 
-      if (req.body.title)
-        event.title = req.body.title;
-      if (req.body.category)
-        event.category = req.body.category;
-      if (req.body.contentHtml)
-        event.contentHtml = req.body.contentHtml;
-      if (req.body.startDate)
-        event.startDate = req.body.startDate;
-      if (req.body.endDate)
-        event.endDate = req.body.endDate;
-      if (req.body.notification)
-        event.notification = req.body.notification;
-      if (req.body.photos)
-        event.photos = req.body.photos;
+      event.title = req.body.title;
+      event.content = req.body.content;
+      event.startDate = req.body.startDate;
+      event.endDate = req.body.endDate;
+
+      event.thumbnail = req.body.thumbnail;
+      event.photo = req.body.photo;
+
+      event.useButton = req.body.useButton;
+      event.buttonText = req.body.buttonText;
+      event.linkUrl = req.body.linkUrl;
 
       return event.save();
     })
-    .then(function (result) {
-      return res.ok(result);
+    .then((event) => {
+      return res.ok({event: event});
     })
     .catch(function (err) {
       if (err.message === 'InvalidParameter'
@@ -208,6 +186,7 @@ function update(req, res) {
     });
 }
 
+
 function remove(req, res) {
   req.getParams("_id")
     .then((query) => {
@@ -215,12 +194,11 @@ function remove(req, res) {
     })
     .then(event => {
       if (!event) throw new Error("EventNotFound");
-
       event.isDeleted = true;
       return event.save();
     })
-    .then(function (result) {
-      return res.ok(result);
+    .then((event) => {
+      return res.ok({event: event});
     })
     .catch(function (err) {
       if (err.message === 'InvalidParameter'

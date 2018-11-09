@@ -1,5 +1,5 @@
 <div class="month-container"
-     *ngIf="toggleValue === 'month'">
+     *ngIf="mode === 'month'">
   <div class="top-display-wrapper">
     <span>일</span>
     <span>월</span>
@@ -11,18 +11,18 @@
   </div>
   <div class="month-wrapper">
     <div class="day-panel"
-         *ngFor="let dayItem of days; let i = index;">
+         *ngFor="let dayItem of monthDays;">
       <div> {{ dayItem.day }}</div>
       <div class="events-area"
-           *ngFor="let event of dayItem.events; let i = index;">
-        <p class="event-title"><i class="material-icons">panorama_fish_eye</i>{{event}}</p>
+           *ngFor="let event of dayItem.events;">
+        <p class="event-title"><i class="material-icons">panorama_fish_eye</i>{{event.title}}</p>
       </div>
     </div>
   </div>
 </div>
 
 <div class="week-container"
-     *ngIf="toggleValue === 'week'">
+     *ngIf="mode === 'week'">
   <div class="top-display-wrapper">
     <span>&nbsp;</span>
     <span>일</span>
@@ -65,20 +65,17 @@
     </div>
 
     <div class="hour-panel">
-      <!--for sunday events-->
       <div class="hour-area"
-           *ngFor="let daysItem of days;">
+           *ngFor="let daysItem of weekDays;">
         <div class="hour-item"
-             *ngFor="let event of daysItem.events; let i = index;">
-          {{event.title}}
+             *ngFor="let hourItem of daysItem.hours;">
+          <div [ngClass]="{'active-event' : hourItem.event}">
+            {{hourItem.event ? hourItem.event.title : ''}}
+          </div>
         </div>
       </div>
-
-
     </div>
   </div>
-
-
 </div>
 
 

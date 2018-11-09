@@ -1,9 +1,20 @@
 'use strict';
 
+/**
+ * Created by Andy on 7/6/2015
+ * As part of Bifido
+ *
+ * Copyright (C) Applicat (www.applicat.co.kr) & Andy Yoon Yong Shin - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Andy Yoon Yong Shin <andy.shin@applicat.co.kr>, 7/6/2015
+ *
+ */
+
 let fnv = require('fnv-plus');
 let url = require('url');
 
-let logger = CalendarServer.logger('AuditPolicy');
+let logger = Bifido.logger('AuditPolicy');
 
 module.exports = function (req, res, next) {
   let ipAddress = req.headers['x-forwarded-for'] || (req.connection && req.connection.remoteAddress);
@@ -15,7 +26,7 @@ module.exports = function (req, res, next) {
 
   let urlParts = (req.originalUrl).split("/");
   if (urlParts[1])
-    _.forEach(CalendarServer.config.routes.routers, (router) => {
+    _.forEach(Bifido.config.routes.routers, (router) => {
       if (router.baseUrl.indexOf("/" + urlParts[1]) == 0) {
         let apiUrl = req.url.split("?");
         let key = req.method.toUpperCase() + " " + apiUrl[0];

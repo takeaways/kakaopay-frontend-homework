@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import {Component, HostBinding, HostListener, OnInit} from '@angular/core';
+import {Component, HostBinding, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {CalendarService} from '../../service/calendar.service';
 
 @Component({
@@ -8,12 +8,8 @@ import {CalendarService} from '../../service/calendar.service';
   styleUrls: ['./control-calendar.component.scss']
 })
 export class ControlCalendarComponent implements OnInit {
-
-  @HostBinding('class.show-date')
   showDate: any;
-
-  @HostBinding('class.toggle-value')
-  toggleValue: string;
+  mode: string;
 
   currentYear: number;
   currentMonth: number;
@@ -32,66 +28,56 @@ export class ControlCalendarComponent implements OnInit {
    *****************************/
 
   ngOnInit() {
-    this.showDate = this.calendarService.getShowDate();
-    this.toggleValue = this.calendarService.getToggleValue();
+    this.showDate = moment();
+    this.mode = 'month';
 
-    if(this.toggleValue === 'week') {
-      this.currentStartYear = this.showDate.startOf('week').year();
-      this.currentEndYear = this.showDate.endOf('week').year();
-      this.currentStartMonth = this.showDate.startOf('week').month() + 1;
-      this.currentEndMonth = this.showDate.endOf('week').month() + 1;
-      this.currentStartWeek = this.showDate.startOf('week').date();
-      this.currentEndWeek = this.showDate.endOf('week').date();
-    } else {
-      this.currentYear = this.calendarService.getShowDate().year();
-      this.currentMonth = this.showDate.month() + 1;
-    }
-
-    this.calendarService.dateChanged.subscribe(showDate => {
-      if(this.toggleValue === 'week') {
-        this.currentStartYear = showDate.startOf('week').year();
-        this.currentEndYear = showDate.endOf('week').year();
-        this.currentStartMonth = showDate.startOf('week').month() + 1;
-        this.currentEndMonth = showDate.endOf('week').month() + 1;
-        this.currentStartWeek = showDate.startOf('week').date();
-        this.currentEndWeek = showDate.endOf('week').date();
-      } else
-        this.currentYear = showDate.get('year');
-        this.currentMonth = showDate.get('month') + 1;
-    });
-
-    this.calendarService.toggleChanged.subscribe(toggleValue => {
-      this.toggleValue = toggleValue;
-      this.calendarService.setShowDate(moment());
-    });
-
+    this.setDateLabel(this.showDate);
   }
 
   /*****************************
    *        util functions
    *****************************/
 
-  @HostListener('prev-click')
   prevClicked() {
-    if(this.toggleValue === 'month') {
-      this.calendarService.minusMonth();
+    if(this.mode === 'month') {
+      this.showDate = moment(this.showDate.subtract(1, 'month'));
     } else {
-      this.calendarService.minusWeek();
+      this.showDate = moment(this.showDate.subtract(1, 'week'));
     }
+
+    this.setDateLabel(this.showDate);
+    this.calendarService.sendEvent('showdate-changed', this.showDate);
   }
 
-  @HostListener('next-click')
   nextClicked() {
-    if(this.toggleValue === 'month') {
-      this.calendarService.plusMonth();
+    if(this.mode === 'month') {
+      this.showDate = moment(this.showDate.add(1, 'month'));
     } else {
-      this.calendarService.plusWeek();
+      this.showDate = moment(this.showDate.add(1, 'week'));
     }
+
+    this.setDateLabel(this.showDate);
+    this.calendarService.sendEvent('showdate-changed', this.showDate);
   }
 
-  @HostListener('toggle-month-week')
-  toggleMonthWeek(value) {
-    this.calendarService.setToggleValue(value);
+  toggleMode(mode) {
+    this.mode = mode;
+    this.setDateLabel(this.showDate);
+    this.calendarService.sendEvent('mode-changed', this.mode);
+  }
+
+  setDateLabel(date) {
+    if(this.mode === 'week') {
+      this.currentStartYear = date.startOf('week').year();
+      this.currentEndYear = date.endOf('week').year();
+      this.currentStartMonth = date.startOf('week').month() + 1;
+      this.currentEndMonth = date.endOf('week').month() + 1;
+      this.currentStartWeek = date.startOf('week').date();
+      this.currentEndWeek = date.endOf('week').date();
+    } else {
+      this.currentYear = date.year();
+      this.currentMonth = date.month() + 1;
+    }
   }
 
   /*****************************

@@ -5,13 +5,13 @@
       <mat-icon>arrow_back_ios</mat-icon>
     </button>
     <div class="date-wrapper"
-         *ngIf="toggleValue === 'month'">
+         *ngIf="mode === 'month'">
       <span>{{currentYear}}</span>년
       <span>{{currentMonth}}</span>월
     </div>
 
     <div class="date-wrapper"
-         *ngIf="toggleValue === 'week'">
+         *ngIf="mode === 'week'">
       <span>{{currentStartYear}}</span>년
       <span>{{currentStartMonth}}</span>월
       <span>{{currentStartWeek}}</span>일 ~
@@ -26,10 +26,10 @@
     </button>
   </div>
   <div class="toggle-container">
-    <mat-button-toggle-group #group="matButtonToggleGroup" value="{{calendarService.getToggleValue()}}">
-      <mat-button-toggle (click)="toggleMonthWeek('month')"
+    <mat-button-toggle-group #group="matButtonToggleGroup" value="{{mode}}">
+      <mat-button-toggle (click)="toggleMode('month')"
                          value="month">월</mat-button-toggle>
-      <mat-button-toggle (click)="toggleMonthWeek('week')"
+      <mat-button-toggle (click)="toggleMode('week')"
                          value="week">주</mat-button-toggle>
     </mat-button-toggle-group>
   </div>

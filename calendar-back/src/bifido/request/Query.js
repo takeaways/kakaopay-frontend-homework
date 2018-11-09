@@ -1,6 +1,18 @@
 'use strict';
 
-let logger = CalendarServer.logger('Query');
+/**
+ * Created by Andy on 7/6/2015
+ * As part of Bifido
+ *
+ * Copyright (C) Applicat (www.applicat.co.kr) & Andy Yoon Yong Shin - All Rights Reserved
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ * Written by Andy Yoon Yong Shin <andy.shin@applicat.co.kr>, 7/6/2015
+ *
+ */
+
+
+let logger = Bifido.logger('Query');
 
 /**************************
  *     Public Interface
@@ -59,7 +71,7 @@ function buildQuery() {
 
     return resolve(params);
   });
-};
+}
 
 function getParams(keys) {
   let query = {};
@@ -67,15 +79,13 @@ function getParams(keys) {
   return new Promise((resolve, reject) => {
     if (keys) {
       if (typeof keys === "string") {
-        let value = this.param(keys);
-        if (typeof value == 'undefined') {
+        if (!this.param(keys)) {
           return reject(new Error("InvalidParameter"));
         }
         query[keys] = this.param(keys);
       } else if (Array.isArray(keys)) {
         _.forEach(keys, (key) => {
-          let value = this.param(key);
-          if (typeof value == 'undefined') {
+          if (!this.param(key)) {
             return reject(new Error("InvalidParameter"));
           }
           query[key] = this.param(key);
@@ -90,7 +100,6 @@ function getParams(keys) {
 }
 
 function applyPolicy(query) {
-
 
   if (this.policyQuery)
     query = _.assign({}, query, this.policyQuery);

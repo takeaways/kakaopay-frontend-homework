@@ -1,117 +1,65 @@
-// Export lib
-declare var _;
-import * as moment from 'moment';
-
-// Browser lib
+import {EventEmitter, Injectable} from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import {Observable} from 'rxjs';
-
-// Angular
-import {EventEmitter, Injectable, Output} from '@angular/core';
-import {URLSearchParams} from '@angular/http';
-
-// Angular third party lib
-// import {InterceptableHttp} from '../../lib/ng-http-interceptor';
-
-// Appzet Source
-// import {config} from "../../app/app.config";
+import {config} from "../../app/app.config";
 
 @Injectable()
 export class CalendarService {
-  private showDate;
-  private toggleValue;
+  private serverUrl = config.serverUrl;
 
-  @Output() dateChanged: EventEmitter<any> = new EventEmitter();
-  @Output() toggleChanged: EventEmitter<any> = new EventEmitter();
+  appEvent: EventEmitter<any> = new EventEmitter();
 
-  setShowDate(date: any) {
-    this.showDate = date;
-    this.dateChanged.emit(this.showDate);
+  constructor(private http: HttpClient) {}
+
+  sendEvent(eventName: string, data?: any) {
+    // Logger.silly('app.service', 'sendEvent');
+    let eventData: {name: string, data?: any} = {name: eventName};
+    if (data) eventData.data = data;
+    this.appEvent.emit(eventData);
   }
 
-  getShowDate() {
-    return this.showDate;
+  find(queryParams: any): Observable<any> {
+    let url = this.serverUrl + '/event' + '/find';
+
+    let params: HttpParams = new HttpParams();
+    for(let property in queryParams) {
+      if(queryParams.hasOwnProperty(property)) {
+        params = params.append(property, JSON.stringify(queryParams[property]));
+      }
+    }
+
+    return this.http.get(url, {params: params});
   }
 
-  //month control
-  minusMonth() {
-    this.showDate = moment(this.showDate.subtract(1, 'month'));
-    this.dateChanged.emit(this.showDate);
+  findOne(queryParams: any): Observable<any> {
+    let url = this.serverUrl + '/event' + '/findOne';
+
+    let params: HttpParams = new HttpParams();
+    for(let property in queryParams) {
+      if(queryParams.hasOwnProperty(property)) {
+        params = params.append(property, JSON.stringify(queryParams[property]));
+      }
+    }
+
+    return this.http.get(url, {params: params});
   }
 
-  plusMonth() {
-    this.showDate = moment(this.showDate.add(1, 'month'));
-    this.dateChanged.emit(this.showDate);
+  create(params: Object): Observable<any> {
+    return this.http
+      .post(this.serverUrl + '/event', params);
   }
 
-  //week control
-  minusWeek() {
-    this.showDate = moment(this.showDate.subtract(1, 'week'));
-    this.dateChanged.emit(this.showDate);
+  update(params: Object): Observable<any> {
+    return this.http
+      .put(this.serverUrl + '/event', params);
   }
 
-  plusWeek() {
-    this.showDate = moment(this.showDate.add(1, 'week'));
-    this.dateChanged.emit(this.showDate);
-  }
+  remove(_id: string): Observable<any> {
+    let param: HttpParams = new HttpParams();
 
-  setToggleValue(value: string){
-    this.toggleValue = value;
-    this.toggleChanged.emit(this.toggleValue);
-  }
+    param.append("_id", _id.toString());
 
-  getToggleValue(){
-    return this.toggleValue;
+    return this.http
+      .delete(this.serverUrl + '/event', {params: param});
   }
-
-  // private serverUrl = config.serverUrl;
-  //
-  // constructor(private http: InterceptableHttp) {
-  // }
-  //
-  // find(queryParams: any): Observable<any> {
-  //   // Logger.silly('point.service', 'find');
-  //   let url = this.serverUrl + '/post' + '/find';
-  //
-  //   let params: URLSearchParams = new URLSearchParams();
-  //   _.forEach(queryParams, (value, key)=> {
-  //     params.set(key, JSON.stringify(value));
-  //   });
-  //
-  //   return this.http
-  //     .get(url, {search: params});
-  // }
-  //
-  // findOne(queryParams: any): Observable<any> {
-  //   // Logger.silly('point.service', 'findOne');
-  //   let url = this.serverUrl + '/post' + '/findOne';
-  //
-  //   let params: URLSearchParams = new URLSearchParams();
-  //   _.forEach(queryParams, (value, key)=> {
-  //     params.set(key, JSON.stringify(value));
-  //   });
-  //
-  //   return this.http.get(url, {search: params});
-  // }
-  //
-  // create(params: Object): Observable<any> {
-  //   // Logger.silly('point.service', 'create');
-  //   return this.http
-  //     .post(this.serverUrl + '/post', params);
-  // }
-  //
-  // update(params: Object): Observable<any> {
-  //   // Logger.silly('point.service', 'update');
-  //   return this.http
-  //     .put(this.serverUrl + '/post', params);
-  // }
-  //
-  // remove(_id: string): Observable<any> {
-  //   // Logger.silly('point.service', 'remove');
-  //   let param: URLSearchParams = new URLSearchParams();
-  //
-  //   param.set("_id", _id.toString());
-  //
-  //   return this.http
-  //     .delete(this.serverUrl + '/post', {search: param});
-  // }
 }
