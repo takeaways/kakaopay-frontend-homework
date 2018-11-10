@@ -1,0 +1,22 @@
+<div class="dialog-message-header">
+  <span>{{title}}</span>
+</div>
+<div class="dialog-message-content">
+  {{message}}
+</div>
+<div class="dialog-message-footer">
+  <div class="dialog-footer-wrapper">
+    <button class="btn-cancel"
+            type="button"
+            *ngIf="type === 'confirm'"
+            (click)="cancel()">
+      취소
+    </button>
+    <button class="btn-confirm"
+            [ngClass]="{'only-confirm': type !== 'confirm'}"
+            type="submit"
+            (click)="confirm()">
+      확인
+    </button>
+  </div>
+</div>

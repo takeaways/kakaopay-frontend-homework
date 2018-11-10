@@ -56,7 +56,7 @@ function find(req, res) {
 
       let queryPromise;
       
-	    if(params.mode === 'month') {
+	    if(params.query.mode === 'month') {
 		    //TODO: mode === 'month'이면 showDate 기준으로 월의 1일 부터 마지막 날까지 쿼링
 	    	params.query.startTime = {
 	    		"$gte": moment(params.query.showDate).startOf('month').toDate(),
@@ -119,14 +119,16 @@ function findOne(req, res) {
 
 function create(req, res) {
   let event;
-  req.getParams(["title", "startTime"])
+  req.getParams(["title", "startTime", "endTime"])
     .then((_event) => {
       event = _event;
-
-      // event.createdBy = req.user._id;
-      // event.updatedBy = req.user._id;
-      // event.owner = req.user._id;
-
+      
+      delete event.endTime;
+      
+      //TODO: 시작 dateTime과 끝 dateTime을 쿼링하여 해당 기간내에 event document가 조회될 경우
+	    //TODO: thorw Error()
+	    //TODO: 조회된 값이 없을 경우 1시간 단위로 event document를 만들어서 저장
+	    //TODO: 11월 10일 토요일 저녁에 할 것.
       return Event.create(event);
     })
     .then((event) => {
@@ -148,6 +150,13 @@ function create(req, res) {
 function update(req, res) {
   req.getParams("_id")
     .then((query) => {
+    	//TODO: update API역시
+	    //TODO: 시작 dateTime과 끝 dateTime을 쿼링하여 해당 기간내에 event document가 조회될 경우
+	    //TODO: thorw Error()
+	    //TODO: 조회된 값이 없을리는 없으니 사용자는 비어있는 시간을 다시 찾으면 됨!!!
+	    //TODO: 11월 10일 토요일 저녁에 할 것.
+    	
+    	
       return Event.findOne(query);
     })
     .then(event => {
@@ -211,4 +220,9 @@ function remove(req, res) {
       logger.log('error', err);
       return res.internalServer();
     });
+}
+
+function checkDateExist(startDate, startTime, endDate, endTime) {
+	
+	Event.find()
 }

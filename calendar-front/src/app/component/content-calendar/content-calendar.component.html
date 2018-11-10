@@ -11,11 +11,13 @@
   </div>
   <div class="month-wrapper">
     <div class="day-panel"
-         *ngFor="let dayItem of monthDays;">
+         *ngFor="let dayItem of monthDays;"
+         (click)="createMonthEvent(dayItem)">
       <div> {{ dayItem.day }}</div>
       <div class="events-area"
-           *ngFor="let event of dayItem.events;">
-        <p class="event-title"><i class="material-icons">panorama_fish_eye</i>{{event.title}}</p>
+           *ngFor="let eventItem of dayItem.events;"
+           (click)="updateMonthEvent($event, dayItem, eventItem)">
+        <p class="event-title"><i class="material-icons">panorama_fish_eye</i>{{eventItem.title}}</p>
       </div>
     </div>
   </div>
@@ -37,6 +39,13 @@
   <div class="week-hour-wrapper">
     <div class="week-panel">
       <div class="hour-display-area">
+        <div class="hour-display-item">오전 12:00</div>
+        <div class="hour-display-item">오전 01:00</div>
+        <div class="hour-display-item">오전 02:00</div>
+        <div class="hour-display-item">오전 03:00</div>
+        <div class="hour-display-item">오전 04:00</div>
+        <div class="hour-display-item">오전 05:00</div>
+        <div class="hour-display-item">오전 06:00</div>
         <div class="hour-display-item">오전 07:00</div>
         <div class="hour-display-item">오전 08:00</div>
         <div class="hour-display-item">오전 09:00</div>
@@ -54,22 +63,17 @@
         <div class="hour-display-item">오후 09:00</div>
         <div class="hour-display-item">오후 10:00</div>
         <div class="hour-display-item">오후 11:00</div>
-        <div class="hour-display-item">오전 12:00</div>
-        <div class="hour-display-item">오전 01:00</div>
-        <div class="hour-display-item">오전 02:00</div>
-        <div class="hour-display-item">오전 03:00</div>
-        <div class="hour-display-item">오전 04:00</div>
-        <div class="hour-display-item">오전 05:00</div>
-        <div class="hour-display-item">오전 06:00</div>
       </div>
     </div>
 
     <div class="hour-panel">
       <div class="hour-area"
-           *ngFor="let daysItem of weekDays;">
+           *ngFor="let dayItem of weekDays;">
         <div class="hour-item"
-             *ngFor="let hourItem of daysItem.hours;">
-          <div [ngClass]="{'active-event' : hourItem.event}">
+             *ngFor="let hourItem of dayItem.hours;"
+             (click)="createMonthEvent(dayItem, hourItem)">
+          <div [ngClass]="{'active-event' : hourItem.event}"
+               (click)="updateMonthEvent($event, dayItem, hourItem)">
             {{hourItem.event ? hourItem.event.title : ''}}
           </div>
         </div>

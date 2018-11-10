@@ -1,10 +1,24 @@
 //Angular
 import { NgModule } from '@angular/core';
 import { BrowserModule }    from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 //Imported Module
-import { MatButtonModule, MatIconModule, MatButtonToggleModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatButtonToggleModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatSelectModule
+} from '@angular/material';
+
+//external module
 
 //In Source
 import { AppRoutingModule } from './app-routing.module';
@@ -12,27 +26,45 @@ import { AppComponent } from './app.component';
 import { ControlCalendarComponent } from './component/control-calendar/control-calendar.component';
 import { ContentCalendarComponent } from './component/content-calendar/content-calendar.component';
 import { DialogEventManageComponent } from './component/dialog-event-manage/dialog-event-manage.component';
-import {CalendarService} from './service/calendar.service';
+import { DialogMessageComponent } from './component/dialog-message/dialog-message.component';
+import { CalendarService } from './service/calendar.service';
+import { DialogService } from './component/dialog-message/dialog-message.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ControlCalendarComponent,
     ContentCalendarComponent,
-    DialogEventManageComponent
+    DialogEventManageComponent,
+    DialogMessageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule,
 
     //Angular Material
     MatButtonModule,
     MatIconModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule
+
+    //external Module
   ],
   providers: [
-    CalendarService
+    CalendarService,
+    DialogService
+  ],
+  entryComponents: [
+    DialogEventManageComponent,
+    DialogMessageComponent
   ],
   bootstrap: [
     AppComponent

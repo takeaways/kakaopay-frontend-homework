@@ -1,3 +1,70 @@
-<p>
-  dialog-event-manage works!
-</p>
+<h1 mat-dialog-title>일정 {{editMode === 'CREATE' ? '만들기' : '수정하기'}}</h1>
+<div mat-dialog-content>
+  <mat-form-field class="title-input">
+    <input matInput
+           [(ngModel)]="title"
+           placeholder="일정 제목을 입력하세요">
+  </mat-form-field>
+
+  <div class="picker-container">
+    <mat-form-field class="form-field">
+      <input matInput
+             [matDatepicker]="startDatepicker"
+             [(ngModel)]="startDate"
+             (dateChange)="startDateChanged($event)"
+             placeholder="시작 날짜">
+      <mat-datepicker-toggle matSuffix
+                             [for]="startDatepicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDatepicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-select placeholder="시작 시간"
+                  [(ngModel)]="startTime">
+        <mat-option *ngFor="let hourItem of hoursArr"
+                    value="{{hourItem.format('A hh:mm')}}">
+          {{hourItem.format('A hh:mm')}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <input matInput
+             [matDatepicker]="endDatePicker"
+             [(ngModel)]="endDate"
+             (dateChange)="endDateChanged($event)"
+             placeholder="종료 날짜">
+      <mat-datepicker-toggle matSuffix
+                             [for]="endDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-select placeholder="종료 시간"
+                  [(value)]="endTime">
+        <mat-option *ngFor="let hourItem of hoursArr"
+                    [value]="hourItem.format('A hh:mm')">
+          {{hourItem.format('A hh:mm')}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button
+          (click)="close()">닫기
+  </button>
+  <button mat-button
+          *ngIf="editMode === 'CREATE'"
+          (click)="create()">저장
+  </button>
+
+  <button mat-button
+          *ngIf="editMode === 'UPDATE'"
+          (click)="update()">수정
+  </button>
+  <button mat-button
+          *ngIf="editMode === 'UPDATE'"
+          (click)="delete()">삭제
+  </button>
+</div>

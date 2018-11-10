@@ -1,7 +1,10 @@
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import {Component, HostBinding, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CalendarService} from '../../service/calendar.service';
+import {DialogEventManageComponent} from '../dialog-event-manage/dialog-event-manage.component';
+
+import {MatDialog, MatDialogConfig} from '@angular/material';
 
 @Component({
   selector: 'app-content-calendar',
@@ -51,16 +54,16 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
    * }
    */
 
-  constructor(public calendarService: CalendarService) {}
+  constructor(public calendarService: CalendarService,
+              public matDialog: MatDialog) {}
 
   /*****************************
    *         life cycle
    *****************************/
 
   ngOnInit() {
+    this.mode = 'week';
     this.showDate = moment();
-    this.mode = 'month';
-
     if (this.appEventDisposor) this.appEventDisposor.unsubscribe();
     this.appEventDisposor = this.calendarService.appEvent.subscribe(this.appEventHandler.bind(this));
 
@@ -129,7 +132,7 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
     this.weekDays = [];
     var current = moment(this.showDate).startOf('week');
     //주 별 시작시간으로 초기화
-    current = moment(current.set('hour', 7));
+    // current = moment(current.set('hour', 7));
 
     // set this Week
     for (let i = 0; i < 7; i++) {
@@ -156,12 +159,50 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
 
       this.weekDays.push({
         year: current.get('year'),
-        month: current.get('month') + 1,
+        month: current.get('month'),
         day: current.get('date'),
         hours: array
       });
-      current = current.add(1, 'day').set('hour', 7);
+      current = current.add(1, 'day');
     }
+  }
+
+  createMonthEvent(dayItem, hourItem?) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '600px';
+    dialogConfig.height = '35%';
+    dialogConfig.disableClose = false;
+
+    const dialogRef = this.matDialog.open(DialogEventManageComponent, dialogConfig);
+    dialogRef.componentInstance.mode = this.mode;
+    dialogRef.componentInstance.editMode = 'CREATE';
+    dialogRef.componentInstance.selectedDateItem = dayItem;
+    if(this.mode === 'week') dialogRef.componentInstance.selectedHourItem = hourItem;
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result !== undefined)
+        this.initialise();
+    });
+  }
+
+  updateMonthEvent(event, dayItem, eventItem) {
+    event.stopPropagation();
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '600px';
+    dialogConfig.height = '35%';
+    dialogConfig.disableClose = false;
+
+    const dialogRef = this.matDialog.open(DialogEventManageComponent, dialogConfig);
+    dialogRef.componentInstance.mode = this.mode;
+    dialogRef.componentInstance.editMode = 'UPDATE';
+    if(this.mode ==='month') dialogRef.componentInstance.eventItem = eventItem;
+    if(this.mode === 'week') dialogRef.componentInstance.eventItem = eventItem.event;
+    dialogRef.componentInstance.selectedDateItem = dayItem;
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result !== undefined)
+        this.initialise();
+    });
   }
 
   /*****************************
@@ -175,14 +216,16 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
         showDate: this.showDate,
         mode: this.mode
       },
-      sort: {createdAt: -1}
+      sort: {startTime: 1}
     })
       .subscribe(result => {
         this.events = result.events;
         if(this.mode === 'month') {
           _.forEach(this.monthDays, (dayItem) => {
             _.forEach(this.events, (eventItem) => {
-              if(dayItem.day === moment(eventItem.startTime).date())
+              if(dayItem.year === moment(eventItem.startTime).year() &&
+                 dayItem.month === moment(eventItem.startTime).month() &&
+                 dayItem.day === moment(eventItem.startTime).date())
                 dayItem.events.push(eventItem);
             });
           });
@@ -201,23 +244,4 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
         }
       });
   }
-
-  createEvent() {
-    let event = {
-      title: "GDG Dev Fest",
-      startTime: moment('2018-11-10 18:00:00').toDate()
-    };
-
-    this.calendarService.create(event)
-      .subscribe((result) => {
-        console.log("result::\n", result);
-      }, error => {
-        console.log('error :::\n', error);
-        // this.dialogService.message('에러', '서버와의 통신중 에러가 발생하였습니다.\n' + error)
-        //   .subscribe(() => {
-        //   });
-      });
-
-  }
-
 }

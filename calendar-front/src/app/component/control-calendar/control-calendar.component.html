@@ -5,12 +5,14 @@
       <mat-icon>arrow_back_ios</mat-icon>
     </button>
     <div class="date-wrapper"
+         (click)="currentClicked()"
          *ngIf="mode === 'month'">
       <span>{{currentYear}}</span>년
       <span>{{currentMonth}}</span>월
     </div>
 
     <div class="date-wrapper"
+         (click)="currentClicked()"
          *ngIf="mode === 'week'">
       <span>{{currentStartYear}}</span>년
       <span>{{currentStartMonth}}</span>월

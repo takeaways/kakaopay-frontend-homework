@@ -2,6 +2,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {config} from "../../app/app.config";
+import {RequestOptions} from '@angular/http';
 
 @Injectable()
 export class CalendarService {
@@ -55,11 +56,10 @@ export class CalendarService {
   }
 
   remove(_id: string): Observable<any> {
-    let param: HttpParams = new HttpParams();
-
-    param.append("_id", _id.toString());
+    const params = new HttpParams()
+      .set('_id', _id);
 
     return this.http
-      .delete(this.serverUrl + '/event', {params: param});
+      .delete(this.serverUrl + '/event', {params});
   }
 }

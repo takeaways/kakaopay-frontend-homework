@@ -28,9 +28,8 @@ export class ControlCalendarComponent implements OnInit {
    *****************************/
 
   ngOnInit() {
+    this.mode = 'week';
     this.showDate = moment();
-    this.mode = 'month';
-
     this.setDateLabel(this.showDate);
   }
 
@@ -78,6 +77,12 @@ export class ControlCalendarComponent implements OnInit {
       this.currentYear = date.year();
       this.currentMonth = date.month() + 1;
     }
+  }
+
+  currentClicked() {
+    this.showDate = moment();
+    this.setDateLabel(this.showDate);
+    this.calendarService.sendEvent('showdate-changed', this.showDate);
   }
 
   /*****************************
