@@ -12,10 +12,14 @@
   <div class="month-wrapper">
     <div class="day-panel"
          *ngFor="let dayItem of monthDays;"
+         droppable
+         (onDrop)="eventOnMonthDropped($event, dayItem)"
          (click)="openCreateEventDialog(dayItem)">
       <div> {{ dayItem.day }}</div>
       <div class="events-area"
            *ngFor="let eventItem of dayItem.events;"
+           draggable
+           [dragData]="eventItem"
            (click)="openUpdateEventDialog($event, dayItem, eventItem)">
         <p class="event-title"><i class="material-icons">panorama_fish_eye</i>{{eventItem.title}}</p>
       </div>
@@ -26,14 +30,35 @@
 <div class="week-container"
      *ngIf="mode === 'week'">
   <div class="top-display-wrapper">
-    <span>&nbsp;</span>
-    <span>일</span>
-    <span>월</span>
-    <span>화</span>
-    <span>수</span>
-    <span>목</span>
-    <span>금</span>
-    <span>토</span>
+    <div>&nbsp;</div>
+    <div>
+      <p>일</p>
+      <p>{{moment(showDate).startOf('week').format('MM/DD')}}</p>
+    </div>
+    <div>
+      <p>월</p>
+      <p>{{moment(showDate).startOf('week').add(1, 'day').format('MM/DD')}}</p>
+    </div>
+    <div>
+      <p>화</p>
+      <p>{{moment(showDate).startOf('week').add(2, 'day').format('MM/DD')}}</p>
+    </div>
+    <div>
+      <p>수</p>
+      <p>{{moment(showDate).startOf('week').add(3, 'day').format('MM/DD')}}</p>
+    </div>
+    <div>
+      <p>목</p>
+      <p>{{moment(showDate).startOf('week').add(4, 'day').format('MM/DD')}}</p>
+    </div>
+    <div>
+      <p>금</p>
+      <p>{{moment(showDate).startOf('week').add(5, 'day').format('MM/DD')}}</p>
+    </div>
+    <div>
+      <p>토</p>
+      <p>{{moment(showDate).startOf('week').add(6, 'day').format('MM/DD')}}</p>
+    </div>
   </div>
 
   <div class="week-hour-wrapper">
@@ -71,9 +96,13 @@
            *ngFor="let dayItem of weekDays;">
         <div class="hour-item"
              *ngFor="let hourItem of dayItem.hours;"
+             droppable
+             (onDrop)="eventOnWeekDropped($event, dayItem, hourItem)"
              (click)="openCreateEventDialog(dayItem, hourItem)">
           <div [ngClass]="{'active-event' : hourItem.event}"
-               (click)="openUpdateEventDialog($event, dayItem, hourItem)">
+               (click)="openUpdateEventDialog($event, dayItem, hourItem)"
+               draggable
+               [dragData]="hourItem.event">
             {{hourItem.event ? hourItem.event.title : ''}}
           </div>
         </div>

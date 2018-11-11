@@ -1,10 +1,10 @@
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {MatDialog, MatDialogConfig} from '@angular/material';
 import {CalendarService} from '../../service/calendar.service';
 import {DialogEventManageComponent} from '../dialog-event-manage/dialog-event-manage.component';
-
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import {DialogService} from '../dialog-message/dialog-message.service';
 
 @Component({
   selector: 'app-content-calendar',
@@ -13,6 +13,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material';
 })
 
 export class ContentCalendarComponent implements OnInit, OnDestroy {
+  moment = moment;
   appEventDisposor: any;
 
   showDate: any;
@@ -55,7 +56,9 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
    */
 
   constructor(public calendarService: CalendarService,
-              public matDialog: MatDialog) {}
+              public matDialog: MatDialog,
+              private dialogService: DialogService) {
+  }
 
   /*****************************
    *         life cycle
@@ -172,10 +175,10 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
     dialogRef.componentInstance.mode = this.mode;
     dialogRef.componentInstance.editMode = 'CREATE';
     dialogRef.componentInstance.selectedDateItem = dayItem;
-    if(this.mode === 'week') dialogRef.componentInstance.selectedHourItem = hourItem;
+    if (this.mode === 'week') dialogRef.componentInstance.selectedHourItem = hourItem;
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result !== undefined)
+      if (result !== undefined)
         this.initialise();
     });
   }
@@ -190,14 +193,22 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
     const dialogRef = this.matDialog.open(DialogEventManageComponent, dialogConfig);
     dialogRef.componentInstance.mode = this.mode;
     dialogRef.componentInstance.editMode = 'UPDATE';
-    if(this.mode ==='month') dialogRef.componentInstance.eventItem = eventItem;
-    if(this.mode === 'week') dialogRef.componentInstance.eventItem = eventItem.event;
+    if (this.mode === 'month') dialogRef.componentInstance.eventItem = eventItem;
+    if (this.mode === 'week') dialogRef.componentInstance.eventItem = eventItem.event;
     dialogRef.componentInstance.selectedDateItem = dayItem;
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result !== undefined)
+      if (result !== undefined)
         this.initialise();
     });
+  }
+
+  eventOnMonthDropped($event, dayItem) {
+    this.update($event.dragData, dayItem);
+  }
+
+  eventOnWeekDropped($event, dayItem, hourItem) {
+    this.update($event.dragData, dayItem, hourItem);
   }
 
   /*****************************
@@ -212,31 +223,92 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
         mode: this.mode
       },
       sort: {startTime: 1}
-    })
-      .subscribe(result => {
-        this.events = result.events;
-        if(this.mode === 'month') {
-          _.forEach(this.monthDays, (dayItem) => {
-            _.forEach(this.events, (eventItem) => {
-              if(dayItem.year === moment(eventItem.startTime).year() &&
-                 dayItem.month === moment(eventItem.startTime).month() &&
-                 dayItem.day === moment(eventItem.startTime).date())
-                dayItem.events.push(eventItem);
-            });
+    }).subscribe(result => {
+      this.events = result.events;
+      if (this.mode === 'month') {
+        _.forEach(this.monthDays, (dayItem) => {
+          _.forEach(this.events, (eventItem) => {
+            if (dayItem.year === moment(eventItem.startTime).year() &&
+              dayItem.month === moment(eventItem.startTime).month() &&
+              dayItem.day === moment(eventItem.startTime).date())
+              dayItem.events.push(eventItem);
           });
-        } else {
-          _.forEach(this.weekDays, dayItem => {
-            _.forEach(this.events, (eventItem) => {
-              if(dayItem.day === moment(eventItem.startTime).date()) {
-                _.forEach(dayItem.hours, hourItem => {
-                  if(hourItem.compareTime.hour() === moment(eventItem.startTime).hour()) {
-                    hourItem.event = eventItem;
-                  }
-                })
-              }
-            });
+        });
+      } else {
+        _.forEach(this.weekDays, dayItem => {
+          _.forEach(this.events, (eventItem) => {
+            if (dayItem.day === moment(eventItem.startTime).date()) {
+              _.forEach(dayItem.hours, hourItem => {
+                if (hourItem.compareTime.hour() === moment(eventItem.startTime).hour()) {
+                  hourItem.event = eventItem;
+                }
+              });
+            }
           });
+        });
+      }
+    }, error => {
+      console.log('error :::\n', error);
+      let msg = '';
+      switch (error.status) {
+        case 400:
+          msg = '잘못된 요청입니다. 제목과 날짜, 시간을 모두 입력해 주세요.';
+          break;
+        case 409:
+          msg = '선택하신 날짜와 시간에 일정이 존재합니다. 다른 날짜와 시간을 선택해주세요.';
+          break;
+        default:
+          msg = '서버와의 통신 중 에러가 발생하였습니다.';
+          return;
+      }
+
+      this.dialogService.message('에러', msg);
+    });
+  }
+
+  update(dragEventItem: any, dayItem: any, hourItem?: any) {
+    let startHour, endHour;
+    if (hourItem) {
+      startHour = hourItem.compareTime.hour();
+      endHour = hourItem.compareTime.hour() + 1;
+    } else {
+      startHour = moment(dragEventItem.startTime).hour();
+      endHour = moment(dragEventItem.startTime).hour() + 1;
+    }
+
+    let event = {
+      _id: dragEventItem._id,
+      title: dragEventItem.title,
+      startTime: moment({
+        years: dayItem.year,
+        month: dayItem.month,
+        day: dayItem.day,
+        hour: startHour
+      }).toDate(),
+      endTime: moment({
+        years: dayItem.year,
+        month: dayItem.month,
+        day: dayItem.day,
+        hour: endHour
+      }).toDate()
+    };
+
+    this.calendarService.update(event)
+      .subscribe((result) => {
+        this.initialise();
+      }, error => {
+        console.log('error :::\n', error);
+        let msg = '';
+        switch (error.status) {
+          case 400:
+            msg = '잘못된 요청입니다. 제목과 날짜, 시간을 모두 입력해 주세요.';
+            break;
+          default:
+            msg = '서버와의 통신 중 에러가 발생하였습니다.';
+            return;
         }
+
+        this.dialogService.message('에러', msg);
       });
   }
 }

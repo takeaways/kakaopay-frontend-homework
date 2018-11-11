@@ -153,8 +153,8 @@
           <file leaf-file-name="EventController.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/api/controllers/EventController.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="339">
-                  <caret line="214" column="21" selection-start-line="214" selection-start-column="21" selection-end-line="214" selection-end-column="21" />
+                <state relative-caret-position="294">
+                  <caret line="135" column="4" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="4" />
                 </state>
               </provider>
             </entry>
@@ -251,9 +251,9 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="792" />
+    <option name="x" value="53" />
     <option name="y" value="23" />
-    <option name="width" value="1128" />
+    <option name="width" value="1867" />
     <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -365,7 +365,7 @@
       <option name="presentableId" value="Default" />
       <updated>1541690235428</updated>
       <workItem from="1541690236570" duration="4721000" />
-      <workItem from="1541698258138" duration="29647000" />
+      <workItem from="1541698258138" duration="30454000" />
     </task>
     <task id="LOCAL-00001" summary="Revert &quot;서버 구축 완료&quot;&#10;&#10;This reverts commit 55c9d63">
       <created>1541690422539</created>
@@ -378,10 +378,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34368000" />
+    <option name="totallyTimeSpent" value="35175000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="53" y="23" width="1867" height="1057" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14788732" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -441,7 +442,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="120" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/api/controllers/EventController.js</url>
+          <line>135</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="121" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="122" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -643,8 +652,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/api/controllers/EventController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="214" column="21" selection-start-line="214" selection-start-column="21" selection-end-line="214" selection-end-column="21" />
+        <state relative-caret-position="294">
+          <caret line="135" column="4" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="4" />
         </state>
       </provider>
     </entry>

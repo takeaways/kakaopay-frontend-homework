@@ -137,7 +137,7 @@ function create(req, res) {
 			  	let eventPromises = [];
 			    
 			    var time = moment(event.startTime);
-			    for(let i = 0; i < diff; i++) {
+			    for(let i = 0; i <= diff; i++) {
 			    	eventPromises.push(Event.create({
 					    title: event.title,
 					    startTime: time.toDate()
@@ -214,7 +214,7 @@ function update(req, res) {
 	    } else {
 		    //1시간 단위로 update 한 경우
 		    event.title = eventParam.title;
-		    event.startTime = eventParam.startTime
+		    event.startTime = eventParam.startTime;
 		    return event.save();
 	    }
     })

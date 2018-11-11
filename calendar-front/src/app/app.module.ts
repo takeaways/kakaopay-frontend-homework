@@ -4,21 +4,13 @@ import { BrowserModule }    from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
-//Imported Module
-import {
-  MatButtonModule,
-  MatIconModule,
-  MatButtonToggleModule,
-  MatDialogModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatDatepickerModule,
-  MatNativeDateModule,
-  MatMenuModule
+import { MatButtonModule, MatIconModule, MatButtonToggleModule,
+        MatDialogModule, MatFormFieldModule, MatInputModule,
+        MatDatepickerModule, MatNativeDateModule, MatMenuModule
 } from '@angular/material';
 
 //external module
+import { NgDragDropModule } from 'ng-drag-drop';
 
 //In Source
 import { AppRoutingModule } from './app-routing.module';
@@ -54,9 +46,10 @@ import { DialogService } from './component/dialog-message/dialog-message.service
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatMenuModule
+    MatMenuModule,
 
     //external Module
+    NgDragDropModule.forRoot()
   ],
   providers: [
     CalendarService,

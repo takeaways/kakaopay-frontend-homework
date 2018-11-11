@@ -238,10 +238,20 @@ export class DialogEventManageComponent implements OnInit {
         if (result) {
           this.calendarService.remove(this.eventItem._id)
             .subscribe(result => {
-              console.log('result::\n', result);
               this.close('deleted');
             }, error => {
-              console.log('error::\n', error);
+              console.log("error :::\n", error);
+              let msg = "";
+              switch (error.status) {
+                case 400:
+                  msg = "잘못된 요청입니다. 제목과 날짜, 시간을 모두 입력해 주세요.";
+                  break;
+                default:
+                  msg = "서버와의 통신 중 에러가 발생하였습니다.";
+                  return;
+              }
+
+              this.dialogService.message("에러", msg);
             });
         }
       });
