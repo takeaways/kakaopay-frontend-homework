@@ -46,21 +46,21 @@ export class DialogEventManageComponent implements OnInit {
     this.endDate = new Date(`${this.selectedDateItem.month + 1}/${this.selectedDateItem.day}/${this.selectedDateItem.year}`);
     if (this.mode === 'month') {
       if (this.editMode === 'CREATE') {
-        this.startTime = moment().startOf('hour').format('A hh:mm');
-        this.endTime = moment().startOf('hour').add(1, 'hour').format('A hh:mm');
+        this.startTime = moment().startOf('hour');
+        this.endTime = moment().startOf('hour').add(1, 'hour');
       } else {
         this.title = this.eventItem.title;
-        this.startTime = moment(this.eventItem.startTime).format('A hh:mm');
-        this.endTime = moment(this.eventItem.startTime).add(1, 'hour').format('A hh:mm');
+        this.startTime = moment(this.eventItem.startTime);
+        this.endTime = moment(this.eventItem.startTime).add(1, 'hour');
       }
     } else {
       if (this.editMode === 'CREATE') {
-        this.startTime = moment(this.selectedHourItem.compareTime).format('A hh:mm');
-        this.endTime = moment(this.selectedHourItem.compareTime).add(1, 'hour').format('A hh:mm');
+        this.startTime = moment(this.selectedHourItem.compareTime);
+        this.endTime = moment(this.selectedHourItem.compareTime).add(1, 'hour');
       } else {
         this.title = this.eventItem.title;
-        this.startTime = moment(this.eventItem.startTime).format('A hh:mm');
-        this.endTime = moment(this.eventItem.startTime).add(1, 'hour').format('A hh:mm');
+        this.startTime = moment(this.eventItem.startTime);
+        this.endTime = moment(this.eventItem.startTime).add(1, 'hour');
       }
     }
 
@@ -95,12 +95,28 @@ export class DialogEventManageComponent implements OnInit {
 
   startDateChanged(event) {
     this.startDate = new Date(event.value);
-    console.log('this.startDate::\n', this.startDate);
+    this.endDate = new Date(event.value);
   }
 
   endDateChanged(event) {
-    this.endDate = new Date(event.value);
-    console.log('this.endDate::\n', this.endDate);
+    if(moment(event.value).isBefore(this.startDate)) {
+      this.dialogService.message('알림', '시작 날짜와 같은 날짜 혹은 이후의 날짜를 선택해 주세요');
+      this.endDate = new Date(this.startDate);
+    } else
+      this.endDate = new Date(event.value);
+  }
+
+  startTimeChanged(hourItem) {
+    //선택한 시간을 기준으로 + 1
+    this.startTime = hourItem;
+    this.endTime = moment(hourItem).add(1, 'hour');
+  }
+
+  endTimeChanged(selectedEndTime) {
+    if(selectedEndTime.hour() < this.startTime.hour()) {
+      this.dialogService.message('알림', '시작 시간 이후의 시간를 선택해 주세요');
+      this.endTime = moment(this.startTime).add(1, 'hour');
+    } else this.endTime = selectedEndTime;
   }
 
   validate() {
@@ -135,38 +151,19 @@ export class DialogEventManageComponent implements OnInit {
 
   create() {
     if (this.validate()) {
-      //TODO: AM/PM 에서의 시간 변환 AM 12:00 --> 00:00, PM 01:00 --> 13:00
-      let start = 0;
-      if (this.startTime.substring(0, 2) === 'PM'){
-        if (this.startTime.substring(3, 5)*1 == 12) start = 12;
-        else start = this.startTime.substring(3, 5) * 1 + 12;
-      } else {
-        if (this.startTime.substring(3, 5)*1 == 12) start = 0;
-        else start = this.startTime.substring(3, 5) * 1;
-      }
-
-      let end = 0;
-      if (this.endTime.substring(0, 2) === 'PM') {
-        if (this.endTime.substring(3, 5)*1 == 12) end = 12;
-        else end = this.endTime.substring(3, 5) * 1 + 12;
-      } else {
-        if (this.endTime.substring(3, 2)*1 == 12) end = 0;
-        else end = this.endTime.substring(3, 5) * 1;
-      }
-
       let event = {
         title: this.title,
         startTime: moment({
-          years: this.selectedDateItem.year,
-          months: this.selectedDateItem.month,
-          days: this.selectedDateItem.day,
-          hour: start
+          years: moment(this.startDate).year(),
+          months: moment(this.startDate).month(),
+          days: moment(this.startDate).date(),
+          hour: moment(this.startTime).hour()
         }).toDate(),
         endTime: moment({
-          years: this.selectedDateItem.year,
-          months: this.selectedDateItem.month,
-          days: this.selectedDateItem.day,
-          hour: end
+          years: moment(this.endDate).year(),
+          months: moment(this.endDate).month(),
+          days: moment(this.endDate).date(),
+          hour: moment(this.endTime).hour()
         }).toDate()
       };
 
@@ -174,16 +171,65 @@ export class DialogEventManageComponent implements OnInit {
         .subscribe((result) => {
           this.close('saved');
         }, error => {
-          console.log('error :::\n', error);
-          this.dialogService.message('에러', '서버와의 통신중 에러가 발생하였습니다.\n' + error)
-            .subscribe(() => {
-            });
+          console.log("error :::\n", error);
+          let msg = "";
+          switch (error.status) {
+            case 400:
+              msg = "잘못된 요청입니다. 제목과 날짜, 시간을 모두 입력해 주세요.";
+              break;
+            case 409:
+              msg = "선택하신 날짜와 시간에 일정이 존재합니다. 다른 날짜와 시간을 선택해주세요.";
+              break;
+            default:
+              msg = "서버와의 통신 중 에러가 발생하였습니다.";
+              return;
+          }
+
+          this.dialogService.message("에러", msg);
         });
     }
   }
 
   update() {
+    if (this.validate()) {
+      let event = {
+        _id: this.eventItem._id,
+        title: this.title,
+        startTime: moment({
+          years: moment(this.startDate).year(),
+          months: moment(this.startDate).month(),
+          days: moment(this.startDate).date(),
+          hour: moment(this.startTime).hour()
+        }).toDate(),
+        endTime: moment({
+          years: moment(this.endDate).year(),
+          months: moment(this.endDate).month(),
+          days: moment(this.endDate).date(),
+          hour: moment(this.endTime).hour()
+        }).toDate()
+      };
 
+      this.calendarService.update(event)
+        .subscribe((result) => {
+          this.close('saved');
+        }, error => {
+          console.log("error :::\n", error);
+          let msg = "";
+          switch (error.status) {
+            case 400:
+              msg = "잘못된 요청입니다. 제목과 날짜, 시간을 모두 입력해 주세요.";
+              break;
+            case 409:
+              msg = "선택하신 날짜와 시간에 일정이 존재합니다. 다른 날짜와 시간을 선택해주세요.";
+              break;
+            default:
+              msg = "서버와의 통신 중 에러가 발생하였습니다.";
+              return;
+          }
+
+          this.dialogService.message("에러", msg);
+        });
+    }
   }
 
   delete() {

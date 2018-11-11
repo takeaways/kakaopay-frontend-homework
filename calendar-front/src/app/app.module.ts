@@ -15,7 +15,7 @@ import {
   MatInputModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatSelectModule
+  MatMenuModule
 } from '@angular/material';
 
 //external module
@@ -54,7 +54,7 @@ import { DialogService } from './component/dialog-message/dialog-message.service
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatMenuModule
 
     //external Module
   ],

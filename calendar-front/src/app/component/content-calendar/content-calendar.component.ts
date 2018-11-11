@@ -62,7 +62,7 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
    *****************************/
 
   ngOnInit() {
-    this.mode = 'week';
+    this.mode = 'month';
     this.showDate = moment();
     if (this.appEventDisposor) this.appEventDisposor.unsubscribe();
     this.appEventDisposor = this.calendarService.appEvent.subscribe(this.appEventHandler.bind(this));
@@ -114,7 +114,6 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
     if (firstWeekDay !== 1) {
       n -= (firstWeekDay + 6) % 7;
     }
-
     let lastDate = 7 - (moment(date).endOf('month').day() + 1);
 
     for (let i = n; i <= (date.endOf('month').date() + lastDate); i += 1) {
@@ -131,10 +130,6 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
   generateWeekCalendar() {
     this.weekDays = [];
     var current = moment(this.showDate).startOf('week');
-    //주 별 시작시간으로 초기화
-    // current = moment(current.set('hour', 7));
-
-    // set this Week
     for (let i = 0; i < 7; i++) {
       var array = [];
       for (let i = 0; i < 24; i++) {
@@ -167,10 +162,10 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
     }
   }
 
-  createMonthEvent(dayItem, hourItem?) {
+  openCreateEventDialog(dayItem, hourItem?) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '600px';
-    dialogConfig.height = '35%';
+    dialogConfig.height = '340px';
     dialogConfig.disableClose = false;
 
     const dialogRef = this.matDialog.open(DialogEventManageComponent, dialogConfig);
@@ -185,11 +180,11 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateMonthEvent(event, dayItem, eventItem) {
+  openUpdateEventDialog(event, dayItem, eventItem) {
     event.stopPropagation();
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = '600px';
-    dialogConfig.height = '35%';
+    dialogConfig.height = '340px';
     dialogConfig.disableClose = false;
 
     const dialogRef = this.matDialog.open(DialogEventManageComponent, dialogConfig);

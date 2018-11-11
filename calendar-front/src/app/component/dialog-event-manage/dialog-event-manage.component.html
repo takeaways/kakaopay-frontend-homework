@@ -7,47 +7,63 @@
   </mat-form-field>
 
   <div class="picker-container">
-    <mat-form-field class="form-field">
-      <input matInput
-             [matDatepicker]="startDatepicker"
-             [(ngModel)]="startDate"
-             (dateChange)="startDateChanged($event)"
-             placeholder="시작 날짜">
-      <mat-datepicker-toggle matSuffix
-                             [for]="startDatepicker"></mat-datepicker-toggle>
-      <mat-datepicker #startDatepicker></mat-datepicker>
-    </mat-form-field>
+    <div class="date-info-wrapper">
+      <mat-form-field class="datepincker-input">
+        <input matInput
+               [matDatepicker]="startDatepicker"
+               [(ngModel)]="startDate"
+               (dateChange)="startDateChanged($event)"
+               placeholder="시작 날짜">
+        <mat-datepicker-toggle matSuffix
+                               [for]="startDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatepicker></mat-datepicker>
+      </mat-form-field>
+      <div class="class-select-wrapper">
+        <p>시작 시간</p>
+        <div class="form-selector" [matMenuTriggerFor]="startTimeMenu">
+          <span>{{startTime.format('A hh:mm')}}</span>
+        </div>
 
-    <mat-form-field class="form-field">
-      <mat-select placeholder="시작 시간"
-                  [(ngModel)]="startTime">
-        <mat-option *ngFor="let hourItem of hoursArr"
-                    value="{{hourItem.format('A hh:mm')}}">
-          {{hourItem.format('A hh:mm')}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-menu class="selector-menu"
+                  #startTimeMenu="matMenu"
+                  [overlapTrigger]="false">
+          <div class="selector-menu-item"
+               *ngFor="let hourItem of hoursArr"
+               (click)="startTimeChanged(hourItem)">
+            <div>{{hourItem.format('A hh:mm')}}</div>
+          </div>
+        </mat-menu>
+      </div>
+    </div>
 
-    <mat-form-field class="form-field">
-      <input matInput
-             [matDatepicker]="endDatePicker"
-             [(ngModel)]="endDate"
-             (dateChange)="endDateChanged($event)"
-             placeholder="종료 날짜">
-      <mat-datepicker-toggle matSuffix
-                             [for]="endDatePicker"></mat-datepicker-toggle>
-      <mat-datepicker #endDatePicker></mat-datepicker>
-    </mat-form-field>
+    <div class="date-info-wrapper">
+      <mat-form-field class="datepincker-input">
+        <input matInput
+               [matDatepicker]="endDatePicker"
+               [(ngModel)]="endDate"
+               (dateChange)="endDateChanged($event)"
+               placeholder="종료 날짜">
+        <mat-datepicker-toggle matSuffix
+                               [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+      </mat-form-field>
+      <div class="class-select-wrapper">
+        <p>종료 시간</p>
+        <div class="form-selector" [matMenuTriggerFor]="endTimeMenu">
+          <span>{{endTime.format('A hh:mm')}}</span>
+        </div>
 
-    <mat-form-field class="form-field">
-      <mat-select placeholder="종료 시간"
-                  [(value)]="endTime">
-        <mat-option *ngFor="let hourItem of hoursArr"
-                    [value]="hourItem.format('A hh:mm')">
-          {{hourItem.format('A hh:mm')}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-menu class="selector-menu"
+                  #endTimeMenu="matMenu" y-position="below"
+                  [overlapTrigger]="false">
+          <div class="selector-menu-item"
+               *ngFor="let hourItem of hoursArr"
+               (click)="endTimeChanged(hourItem)">
+            <div>{{hourItem.format('A hh:mm')}}</div>
+          </div>
+        </mat-menu>
+      </div>
+    </div>
   </div>
 </div>
 <div mat-dialog-actions>

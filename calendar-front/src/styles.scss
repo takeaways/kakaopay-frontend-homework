@@ -1,2 +1,31 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import 'theme/dialog-message.component';
+
+.cdk-overlay-pane {
+  .mat-menu-panel {
+    border: solid 1px #EAEAEA;
+    box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.05);
+    margin-top: 8px;
+    margin-bottom: 2px;
+    max-width: none;
+    max-height: 400px;
+  }
+  .selector-menu-item:hover {
+    background-color: #FAFAFA;
+  }
+  .selector-menu-item {
+    cursor: pointer;
+    width: 100px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+    background-color: #ffffff;
+    img {
+      display: block;
+      height: 10px;
+    }
+  }
+}

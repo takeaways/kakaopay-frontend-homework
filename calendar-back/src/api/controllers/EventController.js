@@ -65,15 +65,15 @@ function find(req, res) {
 	    } else {
 		    //TODO: mode === 'week'이면 showDate 기준으로 주의 첫째 날 부터 마지막 날까지 쿼링
 		    params.query.startTime = {
-			    $gte: moment(params.query.showDate).startOf('week').toDate(),
-			    $lte: moment(params.query.showDate).endOf('week').toDate()
+			    "$gte": moment(params.query.showDate).startOf('week').toDate(),
+			    "$lte": moment(params.query.showDate).endOf('week').toDate()
 		    }
 	    }
 	    
 	    delete params.query.mode;
 	    delete params.query.showDate;
 	
-	    queryPromise = Event.find(params.query);
+	    queryPromise = Event.find(params.query).sort({startTime: 1});
 
       return queryPromise;
     })
@@ -120,19 +120,41 @@ function findOne(req, res) {
 function create(req, res) {
   let event;
   req.getParams(["title", "startTime", "endTime"])
-    .then((_event) => {
-      event = _event;
-      
-      delete event.endTime;
-      
-      //TODO: 시작 dateTime과 끝 dateTime을 쿼링하여 해당 기간내에 event document가 조회될 경우
-	    //TODO: thorw Error()
-	    //TODO: 조회된 값이 없을 경우 1시간 단위로 event document를 만들어서 저장
-	    //TODO: 11월 10일 토요일 저녁에 할 것.
-      return Event.create(event);
-    })
-    .then((event) => {
-      res.ok({event: event});
+	  .then((_event) => {
+		  event = _event;
+		  let query = {
+			  startTime: {
+				  "$gte": event.startTime,
+				  "$lt": event.endTime
+			  }
+		  };
+		  return Event.find(query);
+	  })
+	  .then((events) => {
+		  if(events.length === 0) {
+		  	var diff = moment(event.endTime).diff(moment(event.startTime), 'hours');
+			  if(diff > 1) {
+			  	let eventPromises = [];
+			    
+			    var time = moment(event.startTime);
+			    for(let i = 0; i < diff; i++) {
+			    	eventPromises.push(Event.create({
+					    title: event.title,
+					    startTime: time.toDate()
+				    }));
+			    	time.add(1, 'hours');
+			    }
+			    
+			    return eventPromises;
+			  } else  {
+			  	delete event.endTime;
+			  	return Event.create(event);
+			  }
+		  } else
+		    throw new Error("EventExist");
+	  })
+    .then((result) => {
+      res.ok({result: result});
     })
     .catch(function (err) {
       if (err.message === 'InvalidParameter')
@@ -140,6 +162,9 @@ function create(req, res) {
 
       if (err.name === 'MongoError' || err instanceof Mongoose.Error)
         return res.mongooseError(err);
+      
+      if(err.message === 'EventExist')
+      	return res.conflict();
 
       logger.log('error', err);
       res.internalServer();
@@ -148,36 +173,50 @@ function create(req, res) {
 
 
 function update(req, res) {
-  req.getParams("_id")
-    .then((query) => {
-    	//TODO: update API역시
-	    //TODO: 시작 dateTime과 끝 dateTime을 쿼링하여 해당 기간내에 event document가 조회될 경우
-	    //TODO: thorw Error()
-	    //TODO: 조회된 값이 없을리는 없으니 사용자는 비어있는 시간을 다시 찾으면 됨!!!
-	    //TODO: 11월 10일 토요일 저녁에 할 것.
-    	
-    	
-      return Event.findOne(query);
+	let eventParam;
+  req.getParams(["_id", "title", "startTime", "endTime"])
+    .then((_event) => {
+	    eventParam = _event;
+    	let query = {
+		    startTime: {
+			    "$gte": eventParam.startTime,
+			    "$lt": eventParam.endTime
+		    }
+	    };
+	    return Event.find(query);
     })
-    .then(event => {
-      if (!event) throw new Error("EventNotFound");
-
-      event.lastUpdatedAt = new Date();
-      event.updatedBy = req.user._id;
-
-      event.title = req.body.title;
-      event.content = req.body.content;
-      event.startDate = req.body.startDate;
-      event.endDate = req.body.endDate;
-
-      event.thumbnail = req.body.thumbnail;
-      event.photo = req.body.photo;
-
-      event.useButton = req.body.useButton;
-      event.buttonText = req.body.buttonText;
-      event.linkUrl = req.body.linkUrl;
-
-      return event.save();
+	  .then((events) => {
+		  if(events.length === 0) {
+			  var diff = moment(eventParam.endTime).diff(moment(eventParam.startTime), 'hours');
+			  if(diff > 1) {
+				  let eventPromises = [];
+				
+				  var time = moment(eventParam.startTime);
+				  for(let i = 0; i < diff; i++) {
+					  eventPromises.push(Event.create({
+						  title: eventParam.title,
+						  startTime: time.toDate()
+					  }));
+					  time.add(1, 'hours');
+				  }
+				
+				  return [Event.findOne({_id: eventParam._id}), eventPromises];
+			  } else  {
+				  return [Event.findOne({_id: eventParam._id}), undefined];
+			  }
+		  } else
+			  throw new Error("EventExist");
+	  })
+    .spread((event, createdEvents) => {
+    	if(createdEvents) {
+    		event.isDeleted = true;
+		    return event.save();
+	    } else {
+		    //1시간 단위로 update 한 경우
+		    event.title = eventParam.title;
+		    event.startTime = eventParam.startTime
+		    return event.save();
+	    }
     })
     .then((event) => {
       return res.ok({event: event});
@@ -189,6 +228,9 @@ function update(req, res) {
 
       if (err.name === 'MongoError' || err instanceof Mongoose.Error)
         return res.mongooseError(err);
+	
+	    if(err.message === 'EventExist')
+		    return res.conflict();
 
       logger.log('error', err);
       return res.internalServer();
@@ -220,9 +262,4 @@ function remove(req, res) {
       logger.log('error', err);
       return res.internalServer();
     });
-}
-
-function checkDateExist(startDate, startTime, endDate, endTime) {
-	
-	Event.find()
 }

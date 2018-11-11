@@ -12,11 +12,11 @@
   <div class="month-wrapper">
     <div class="day-panel"
          *ngFor="let dayItem of monthDays;"
-         (click)="createMonthEvent(dayItem)">
+         (click)="openCreateEventDialog(dayItem)">
       <div> {{ dayItem.day }}</div>
       <div class="events-area"
            *ngFor="let eventItem of dayItem.events;"
-           (click)="updateMonthEvent($event, dayItem, eventItem)">
+           (click)="openUpdateEventDialog($event, dayItem, eventItem)">
         <p class="event-title"><i class="material-icons">panorama_fish_eye</i>{{eventItem.title}}</p>
       </div>
     </div>
@@ -71,9 +71,9 @@
            *ngFor="let dayItem of weekDays;">
         <div class="hour-item"
              *ngFor="let hourItem of dayItem.hours;"
-             (click)="createMonthEvent(dayItem, hourItem)">
+             (click)="openCreateEventDialog(dayItem, hourItem)">
           <div [ngClass]="{'active-event' : hourItem.event}"
-               (click)="updateMonthEvent($event, dayItem, hourItem)">
+               (click)="openUpdateEventDialog($event, dayItem, hourItem)">
             {{hourItem.event ? hourItem.event.title : ''}}
           </div>
         </div>
