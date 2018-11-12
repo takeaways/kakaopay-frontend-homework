@@ -3,14 +3,14 @@
 
 [데모 영상보기](https://www.naver.com)
 ## Content
-1. [개발 환경](#개발-환경)
-2. [설치 및 실행 방법](#설치-및-실행-방법)
-3. [Dependencies](#Dependencies)
-4. [API 명세](#API-명세)
-5. [과제 요구사항](#과제-요구사항)
-6. [문제 해결 전략](#문제-해결-전략)
+1. [개발 환경](#1.-개발-환경)
+2. [설치 및 실행 방법](#2.-설치-및-실행-방법)
+3. [Dependencies](#3.-Dependencies)
+4. [API 명세](#4.-API-명세)
+5. [과제 요구사항](#5.-과제-요구사항)
+6. [문제 해결 전략](#6.-문제-해결-전략)
 
-## 1. 개발 환경
+##1. 개발 환경
 
 #### Front-End
 * Angular7
@@ -21,7 +21,7 @@
 * ExpressJS
 * MongoDB
 --- 
-## 2. 설치 및 실행 방법
+##2. 설치 및 실행 방법
 
 ### Back-End 
 ~~~javascript
@@ -50,7 +50,7 @@ $> npm install
 $> ng serve
 ~~~
 
-## 3.Dependencies
+##3. Dependencies
 |  Dependency  | version |
 |--------------|---------|
 | ------- FrontEnd -------|
@@ -66,7 +66,7 @@ $> ng serve
 | moment   | ^2.22.2 |
 | lodash   | ^4.17.11 |
 
-## 4. API 명세
+##4. API 명세
 ### 4.1 Event(일정) 리스트
 > event 리스트를 가져오는 API
 > URL : 'GET /event/find'
@@ -145,7 +145,7 @@ _id: ObjectId //삭제 할 event를 조회하기 위한 용도
 |  404  | not found | Error Object(status, message) |
 |  500  | bad request | Error Object(status, message) |
 
-## 5. 과제 요구사항
+##5. 과제 요구사항
 - SPA(Single Page Application)로 개발한다.
 - 프론트엔드 구현 방법은 제한 없다. (Angular, React, Preact, Vue, jQuery...)
 - UI 구현에 대한 제약은 없다.
@@ -154,7 +154,7 @@ _id: ObjectId //삭제 할 event를 조회하기 위한 용도
 - 단위테스트는 필수, 통합테스트는 선택
 - README.md 파일에 문제해결 전략 및 프로젝트 빌드, 실행 방법 명시
 
-## 6. 문제 해결 전략
+##6. 문제 해결 전략
 * mongo 모델은 '제목', '시작 시간', '삭제 여부'로 생성 (Event Model)
     * 종료시간은 필요하지 않다고 생각함(이벤트의 시작 시간에서 계산 할 수 있고, 또한 모든 일정은 1시간 단위이므로)
 * calendar에 대한 UI는 요구사항에 맞게 개발하기 위하여 라이브러리나 프레임워크를 가져다 사용하지 않고 직접 구현
