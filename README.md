@@ -1,7 +1,7 @@
 # kakaopay-calendar
 > 일정을 관리하는 Calendar 웹 어플리케이션 구현. 사용자는 상단의 '월/주' 별 버튼을 통해 하단 '월/주'에 대한 일정을 확인 할 수 있으며, 상단 왼쪽의 기간 선택 버튼을 통해 선택한 기간의 일정도 확인 할 수 있다.
 
-[데모 영상보기](https://www.naver.com)
+[데모 영상보기](https://www.useloom.com/share/3edcc0798b9f438da33493aa2cacc2f7)
 ## Content
 1. [개발 환경](#dev-spec)
 2. [설치 및 실행 방법](#installation)
