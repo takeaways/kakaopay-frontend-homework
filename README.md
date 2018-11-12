@@ -23,7 +23,28 @@
 * NodeJS (version >= 8.9 for angular cli)
 * ExpressJS
 * MongoDB
----
+
+### 1.1 Folder Structure
+
+```bash
+├── calendar-front
+│   └── src
+│       ├── app             # front source code를 포함 (component, service, app.component, app.module.ts등)
+│       ├── assets          # assets files
+│       ├── theme           # 커스터마이징한 스타일들 포함
+│       ├── favicon.ico
+│       ├── index.html
+│       ├── karma.conf.js
+│       ├── style.scss      # 외부 라이브러리의 스타일 파일들을 불러옴
+│       └── index.html
+│
+└── calendar-back
+    └── src
+        ├── app             # back source code를 포함(controllers, hook, models, policies등)
+        ├── bifido          # express 서버의 미들웨어 및 설정 등을 포함
+        └── config          # 서버 route, api end point, cors, mongodb 설정 값들을 포함
+```
+
 <h2 id="installation">
     2. 설치 및 실행 방법
 </h2>
@@ -85,11 +106,11 @@ $> ng serve
 #### 4.1.1 Parameter
 ~~~javascript
 query: {
-    isDeleted: false, //일정 삭제 여부
-    showDate: this.showDate, //사용자가 선택한 기준 날짜
-    mode: this.mode //사용자가 선택한 '월/주' 모드
+    isDeleted: Boolean, //일정 삭제 여부
+    showDate: Date, //사용자가 선택한 기준 날짜
+    mode: String //사용자가 선택한 '월/주' 모드 'month' or 'week'
 },
-sort: {startTime: 1} //일정의 시작 시간 기준으로 정렬
+sort: Object //일정의 시작 시간 기준으로 정렬 ex) sort: {startTime: 1}
 ~~~
 #### 4.1.2 응답 코드
 |  code | status | data      |
@@ -185,4 +206,5 @@ _id: ObjectId //삭제 할 event를 조회하기 위한 용도
     * 이를 위해 실제로는 db에 저장하지는 않지만 시간 검증을 위한 endTime을 parameter로 받음
     * 서버에서는 (endTime - startTime) > 1 일 경우 startTime부터 1시간 단위로 이벤트를 만들어 주는 로직으로 해결
     * CREATE와 UPDATE API의 경우 비슷하지만 약간의 차이가 있는데, CREATE의 경우 1시간 이상 차이가 날경우 시간마다 이벤트를 만들어 주었으며, UPDATE의 경우 역시 1시간 단위로 이벤트를 만들고, 기존의 사용자가 선택한 이벤트는 isDeleted = false 로 처리
+    * (위에 대한 서버 로직은 /calendar-back/src/app/controllers/EventController 참조)
 * Drag n Drop은 ng-drag-drop 모듈을 사용하여 해결
