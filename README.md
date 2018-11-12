@@ -1,41 +1,151 @@
-웹개발자 #3. 사전과제
+# kakaopay-calendar
+> 일정을 관리하는 Calendar 웹 어플리케이션 구현. 사용자는 상단의 '월/주' 별 버튼을 통해 하단 '월/주'에 대한 일정을 확인 할 수 있으며, 상단 왼쪽의 기간 선택 버튼을 통해 선택한 기간의 일정도 확인 할 수 있다.
 
-### 과제
-- 일정을 관리하는 Calendar 웹 어플리케이션 구현
+[데모 영상보기](https://www.naver.com)
+## Content
+1. 개발 환경
+2. 설치 및 실행 방법
+3. Dependencies
+4. API 명세
+5. 과제 요구사항
+6. 문제 해결 전략
+---
+## 1. 개발 환경
 
-### 기능
-- 사용자는 월별/주별로 등록된 일정을 확인할 수 있다.
-  - 각 화면은 현재 날짜가 속한 월/주를 기준으로 화면을 표시한다.
-- 화면은 총 2개의 분할된 화면을 표시한다.
-  - 상단 Control View
-    - <, >, 현재 월/주 표시, 월/주 전환 버튼
-    - 현재 월/주 표시는 하단의 Calendar View에 해당하는 월/주를 표시한다.
-      - 월/주 텍스트 표시 선택 시 현재 날짜 기준 월 또는 주 View로 이동한다.
-    - < , > 버튼을 통해 이전/다음 월/주로 이동할 수 있다.
-    - 월/주 전환 버튼을 통해 하단의 Calendar view를 월/주 화면은 전환한다.
+#### Front-End
+* Angular7
+* Angular Material
 
-  - 하단 Calendar View
-    - 월(Monthly) 화면
-      - 월 전체 일정을 확인할 수 있다.
-      - 해당 날짜의 일정은 시간 순서대로 표시한다.
-      - 날짜를 선택하면 해당 날짜와 현재 시간을 기준으로 한 1시간의 일정을 추가할 수 있는 팝업을 표시한다.
+#### Back-End
+* NodeJS (version >= 8.9 for angular cli)
+* ExpressJS
+* MongoDB
+--- 
+## 2. 설치 및 실행 방법
 
-    - 주(Weekly) 화면
-      - 주 전체의 일정을 확인할 수 있다.
-      - 일별 시간을 표시한다.
-      - 시간 단위 일정은 해당 시간대에 표시한다.
-      - 날짜에서 시간을 선택 시 해당 날짜와 선택 시간 기준 1시간의 일정을 추가할 수 있는 팝업을 표시한다.
+### Back-End 
+~~~javascript
+//mongodb 설치(mac을 기준으로 brew로 설치하였습니다. windows 설치 방법과는 다를 수 있음)
+$> brew install mongodb
 
-    - 일정 추가/수정/삭제 화면
-      - 일정 제목 입력과 시간 선택 콤보 박스, 취소/저장 버튼이 존재한다.
-      - 기존 일정 선택의 팝업 표시시에는 제목 및 시간이 표시되며 변경 후 저장할 수 있고 삭제 버튼이 표시되어 삭제가 가능하다.
-      - DatePicker는 직접 구현하지 않고 라이브러리 사용해도 무방하다.
+$> cd calendar-back
 
-- 각 일정 추가 및 변경 시 다른 일정과의 데이터 검증을 하며 시간 중복 시 오류를 표시한다.
-- 모든 일정의 단위는 1시간 단위로 생성한다.(ex, 1시간, 2시간, 3시간..., 일단위 X)
-- 각 일정은 Drag n Drop으로 일정을 변경할 수 있다.
+//install dependency
+$> npm install
 
-### 과제 요구사항
+//start server
+$> npm start
+~~~
+### Front-End
+~~~javascript
+//angular cli 설치 (Node >= 8.9 필요)
+$> npm install -g @angular/cli
+
+$> cd calendar-front
+
+//install dependency
+$> npm install
+
+//dev server 실행. `http://localhost:4200/`으로 접속
+$> ng serve
+~~~
+
+## 3.Dependencies
+|  Dependency  | version |
+|--------------|---------|
+| ------- FrontEnd -------|
+| Angular    |   7.0.2   |
+| Angular Material  | 7.0.2  |
+| lodash  | ^4.17.11  |
+| moment  | ^2.22.2   |
+| ng-drag-drop  |  ^5.0.0 |
+| rxjs  |  ~6.3.3 |
+| ------- Back-End ------- |
+| express  | 4.13.1  |
+| mongoose | 4.5.7 |
+| moment   | ^2.22.2 |
+| lodash   | ^4.17.11 |
+
+## 4. API 명세
+### 4.1 Event(일정) 리스트
+> event 리스트를 가져오는 API
+> URL : 'GET /event/find'
+
+#### 4.1.1 Parameter
+~~~javascript
+query: {
+    isDeleted: false, //일정 삭제 여부
+    showDate: this.showDate, //사용자가 선택한 기준 날짜
+    mode: this.mode //사용자가 선택한 '월/주' 모드
+},
+sort: {startTime: 1} //일정의 시작 시간 기준으로 정렬
+~~~
+#### 4.1.2 응답 코드
+|  code | status | data      |
+|-------|-------|---------   |
+|  200  | success | events: []| 
+|  400  | bad request | Error Object(status, message) |
+|  404  | not found | Error Object(status, message) |
+|  500  | bad request | Error Object(status, message) |
+
+### 4.2 Event(일정) 생성
+> event 생성 API
+> URL : 'POST /event'
+
+#### 4.2.1 Parameter
+~~~javascript
+title: String, //이벤트의 제목
+startTime: Date //이벤트 시작시간(DB내에서 조회하기 위한 용도)
+endTime: Date //이벤트 종료시간(DB내에서 조회하기 위한 용도)
+~~~
+#### 4.2.2 응답 코드
+|  code | status | data      |
+|-------|-------|---------   |
+|  200  | success | result: Object| 
+|  400  | bad request | Error Object(status, message) |
+|  409  | conflict | Error Object(status, message) |
+|  404  | not found | Error Object(status, message) |
+|  500  | bad request | Error Object(status, message) |
+
+### 4.3 Event(일정) 업데이트
+> event 업데이트 API
+> URL : 'PUT /event'
+
+#### 4.3.1 Parameter
+~~~javascript
+_id: ObjectId //업데이트 할 event를 조회하기 위한 용도
+title: String //업데이트 할 제목
+startTime: Date //이벤트 시작시간(DB내에서 조회하기 위한 용도)
+endTime: Date //이벤트 종료시간(DB내에서 조회하기 위한 용도)
+~~~
+
+#### 4.3.2 응답 코드
+|  code | status | data      |
+|-------|-------|---------   |
+|  200  | success | result: Object | 
+|  400  | bad request | Error Object(status, message) |
+|  409  | conflict | Error Object(status, message) |
+|  404  | not found | Error Object(status, message) |
+|  500  | bad request | Error Object(status, message) |
+
+### 4.4 Event(일정) 삭제
+> event 삭제 API
+> URL : 'DELETE /event'
+
+#### 4.4.1 Parameter
+~~~javascript
+_id: ObjectId //삭제 할 event를 조회하기 위한 용도
+~~~
+#### 4.4.2 응답 코드
+|  code | status | data      |
+|-------|-------|---------   |
+|  200  | success | result: Object | 
+|  400  | bad request | Error Object(status, message) |
+|  409  | conflict | Error Object(status, message) |
+|  404  | not found | Error Object(status, message) |
+|  500  | bad request | Error Object(status, message) |
+
+## 5. 과제 요구사항
 - SPA(Single Page Application)로 개발한다.
 - 프론트엔드 구현 방법은 제한 없다. (Angular, React, Preact, Vue, jQuery...)
 - UI 구현에 대한 제약은 없다.
@@ -43,3 +153,19 @@
 - 데이타베이스는 사용에 제약 없다. (가능하면 In-memory db 사용하거나 메모리에 저장해도 무방하다.)
 - 단위테스트는 필수, 통합테스트는 선택
 - README.md 파일에 문제해결 전략 및 프로젝트 빌드, 실행 방법 명시
+
+## 6. 문제 해결 전략
+* mongo 모델은 '제목', '시작 시간', '삭제 여부'로 생성 (Event Model)
+    * 종료시간은 필요하지 않다고 생각함(이벤트의 시작 시간에서 계산 할 수 있고, 또한 모든 일정은 1시간 단위이므로)
+* calendar에 대한 UI는 요구사항에 맞게 개발하기 위하여 라이브러리나 프레임워크를 가져다 사용하지 않고 직접 구현
+* UI는 크게 4개로 구분
+    * 일정, 월/주를 컨트롤 하는 control-calendar.component
+    * 컨트롤에 의한 view를 표시하는 content-calendar.component
+    * 일정을 생성/수정/삭제하는 dialog-event-manage.component
+    * 유효성 체크/에러 핸들링 후 메시지를 표시하는 dialog-message.component
+* 날짜계산을 위해 moment.js사용
+* 가장 고민했던 부분은 '일정 추가/수정 dialog에서 사용자가 선택한 시작시간과 종료시간이 1시간이 아닐 때 어떻게 처리할까' 였음
+    * 이를 위해 실제로는 db에 저장하지는 않지만 시간 검증을 위한 endTime을 parameter로 받음
+    * 서버에서는 (endTime - startTime) > 1 일 경우 startTime부터 1시간 단위로 이벤트를 만들어 주는 로직으로 해결
+    * CREATE와 UPDATE API의 경우 비슷하지만 약간의 차이가 있는데, CREATE의 경우 1시간 이상 차이가 날경우 시간마다 이벤트를 만들어 주었으며, UPDATE의 경우 역시 1시간 단위로 이벤트를 만들고, 기존의 사용자가 선택한 이벤트는 isDeleted = false 로 처리
+* Drag n Drop은 ng-drag-drop 모듈을 사용하여 해결
