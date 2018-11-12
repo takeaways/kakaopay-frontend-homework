@@ -249,9 +249,9 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="52" />
+    <option name="x" value="986" />
     <option name="y" value="23" />
-    <option name="width" value="1868" />
+    <option name="width" value="934" />
     <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -365,7 +365,7 @@
       <updated>1541690235428</updated>
       <workItem from="1541690236570" duration="4721000" />
       <workItem from="1541698258138" duration="31671000" />
-      <workItem from="1542019043586" duration="4529000" />
+      <workItem from="1542019043586" duration="4688000" />
     </task>
     <task id="LOCAL-00001" summary="Revert &quot;서버 구축 완료&quot;&#10;&#10;This reverts commit 55c9d63">
       <created>1541690422539</created>
@@ -378,7 +378,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40921000" />
+    <option name="totallyTimeSpent" value="41080000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="53" y="23" width="1867" height="1057" extended-state="6" />
