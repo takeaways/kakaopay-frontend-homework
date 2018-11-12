@@ -2,7 +2,6 @@ import {EventEmitter, Injectable} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {config} from "../../app/app.config";
-import {RequestOptions} from '@angular/http';
 
 @Injectable()
 export class CalendarService {
@@ -10,7 +9,7 @@ export class CalendarService {
 
   appEvent: EventEmitter<any> = new EventEmitter();
 
-  constructor(private http: HttpClient) {}
+  constructor(public http: HttpClient) {}
 
   sendEvent(eventName: string, data?: any) {
     // Logger.silly('app.service', 'sendEvent');
