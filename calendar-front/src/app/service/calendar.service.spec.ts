@@ -18,8 +18,7 @@ describe('CalendarService', () => {
     });
   });
 
-  it('should use ValueService', () => {
+  it('should get calendar.service', () => {
     service = TestBed.get(CalendarService);
-    // expect(service.getValue()).toBe('real value');
   });
 });

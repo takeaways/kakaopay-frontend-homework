@@ -41,16 +41,4 @@ describe('ControlCalendarComponent', () => {
   it('should create control-calendar.component', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should create control-calendar.component', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('should initialise mode, showDate variable', () => {
-
-  });
-
-  it('should set date label', () => {
-
-  })
 });
