@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {CalendarService} from '../../service/calendar.service';
 import {DialogEventManageComponent} from '../dialog-event-manage/dialog-event-manage.component';
@@ -14,7 +14,7 @@ import {DialogService} from '../dialog-message/dialog-message.service';
 
 export class ContentCalendarComponent implements OnInit, OnDestroy {
   moment = moment;
-  appEventDisposor: any;
+  appEventDisposor: EventEmitter<any>;
 
   showDate: any;
   mode: string;
@@ -67,8 +67,11 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.mode = 'month';
     this.showDate = moment();
-    if (this.appEventDisposor) this.appEventDisposor.unsubscribe();
-    this.appEventDisposor = this.calendarService.appEvent.subscribe(this.appEventHandler.bind(this));
+
+    if (this.appEventDisposor)
+      this.appEventDisposor.unsubscribe();
+    if(this.calendarService.appEvent)
+      this.appEventDisposor = this.calendarService.appEvent.subscribe(this.appEventHandler.bind(this));
 
     this.initialise();
   }

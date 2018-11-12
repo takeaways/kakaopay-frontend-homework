@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import {Component, HostBinding, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CalendarService} from '../../service/calendar.service';
 
 @Component({

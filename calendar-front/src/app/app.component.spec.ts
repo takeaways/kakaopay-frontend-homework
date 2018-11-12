@@ -1,27 +1,25 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentFixture, async, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
-import {ControlCalendarComponent} from './component/control-calendar/control-calendar.component';
-import {ContentCalendarComponent} from './component/content-calendar/content-calendar.component';
-import {RouterModule, Routes} from '@angular/router';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-      ],
-      declarations: [
-        AppComponent,
-        ControlCalendarComponent,
-        ContentCalendarComponent
-      ],
+      declarations: [AppComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
-  it('testtest', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
+
+  it('should create app.component', () => {
+    expect(component).toBeTruthy();
+  })
 });

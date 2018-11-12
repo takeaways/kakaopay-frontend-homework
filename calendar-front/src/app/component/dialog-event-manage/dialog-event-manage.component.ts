@@ -16,7 +16,7 @@ export class DialogEventManageComponent implements OnInit {
   mode: string;
   editMode: string = ''; //CREATE or UPDATE
 
-  title: string = '';
+  title: string;
 
   eventItem: any;
   //for Month
@@ -42,6 +42,9 @@ export class DialogEventManageComponent implements OnInit {
    *****************************/
 
   ngOnInit() {
+    if(!this.selectedDateItem) this.selectedDateItem = {day: 1, events: [], month: 10, year: 2018}
+    if(!this.eventItem) this.eventItem = { title: "test title", startTime: "2018-11-14T00:00:00.000Z"};
+
     this.startDate = new Date(`${this.selectedDateItem.month + 1}/${this.selectedDateItem.day}/${this.selectedDateItem.year}`);
     this.endDate = new Date(`${this.selectedDateItem.month + 1}/${this.selectedDateItem.day}/${this.selectedDateItem.year}`);
     if (this.mode === 'month') {
@@ -63,7 +66,6 @@ export class DialogEventManageComponent implements OnInit {
         this.endTime = moment(this.eventItem.startTime).add(1, 'hour');
       }
     }
-
 
     this.setHoursArray();
   }

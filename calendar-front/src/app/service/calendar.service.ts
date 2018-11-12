@@ -7,7 +7,7 @@ import {config} from "../../app/app.config";
 export class CalendarService {
   private serverUrl = config.serverUrl;
 
-  appEvent: EventEmitter<any> = new EventEmitter();
+  public appEvent: EventEmitter<any> = new EventEmitter();
 
   constructor(public http: HttpClient) {}
 
@@ -20,19 +20,6 @@ export class CalendarService {
 
   find(queryParams: any): Observable<any> {
     let url = this.serverUrl + '/event' + '/find';
-
-    let params: HttpParams = new HttpParams();
-    for(let property in queryParams) {
-      if(queryParams.hasOwnProperty(property)) {
-        params = params.append(property, JSON.stringify(queryParams[property]));
-      }
-    }
-
-    return this.http.get(url, {params: params});
-  }
-
-  findOne(queryParams: any): Observable<any> {
-    let url = this.serverUrl + '/event' + '/findOne';
 
     let params: HttpParams = new HttpParams();
     for(let property in queryParams) {
