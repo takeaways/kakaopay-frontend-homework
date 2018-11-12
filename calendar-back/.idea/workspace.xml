@@ -176,7 +176,7 @@
             <entry file="file://$PROJECT_DIR$/src/api/controllers/PostController.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="282">
-                  <caret line="281" column="13" lean-forward="true" selection-start-line="281" selection-start-column="13" selection-end-line="281" selection-end-column="13" />
+                  <caret line="281" column="13" selection-start-line="281" selection-start-column="13" selection-end-line="281" selection-end-column="13" />
                 </state>
               </provider>
             </entry>
@@ -251,9 +251,9 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="704" />
+    <option name="x" value="52" />
     <option name="y" value="23" />
-    <option name="width" value="1216" />
+    <option name="width" value="1868" />
     <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -646,7 +646,7 @@
     <entry file="file://$PROJECT_DIR$/src/api/controllers/PostController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
-          <caret line="281" column="13" lean-forward="true" selection-start-line="281" selection-start-column="13" selection-end-line="281" selection-end-column="13" />
+          <caret line="281" column="13" selection-start-line="281" selection-start-column="13" selection-end-line="281" selection-end-column="13" />
         </state>
       </provider>
     </entry>
