@@ -115,8 +115,8 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
     let month = date.month();
     let year = date.year();
     let n = 1;
+    //배열은 0부터 시작, 날짜는 1부터 시작하므로 .date(2)를 해줌
     let firstWeekDay = date.date(2).day();
-
     if (firstWeekDay !== 1) {
       n -= (firstWeekDay + 6) % 7;
     }
@@ -257,9 +257,6 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
         case 400:
           msg = '잘못된 요청입니다. 제목과 날짜, 시간을 모두 입력해 주세요.';
           break;
-        case 409:
-          msg = '선택하신 날짜와 시간에 일정이 존재합니다. 다른 날짜와 시간을 선택해주세요.';
-          break;
         default:
           msg = '서버와의 통신 중 에러가 발생하였습니다.';
           return;
@@ -305,6 +302,9 @@ export class ContentCalendarComponent implements OnInit, OnDestroy {
         switch (error.status) {
           case 400:
             msg = '잘못된 요청입니다. 제목과 날짜, 시간을 모두 입력해 주세요.';
+            break;
+          case 409:
+            msg = '선택하신 날짜와 시간에 일정이 존재합니다. 다른 날짜와 시간을 선택해주세요.';
             break;
           default:
             msg = '서버와의 통신 중 에러가 발생하였습니다.';

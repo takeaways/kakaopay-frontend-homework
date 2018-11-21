@@ -12,7 +12,6 @@ export class CalendarService {
   constructor(public http: HttpClient) {}
 
   sendEvent(eventName: string, data?: any) {
-    // Logger.silly('app.service', 'sendEvent');
     let eventData: {name: string, data?: any} = {name: eventName};
     if (data) eventData.data = data;
     this.appEvent.emit(eventData);

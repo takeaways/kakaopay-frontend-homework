@@ -126,7 +126,8 @@ function create(req, res) {
 			  startTime: {
 				  "$gte": event.startTime,
 				  "$lt": event.endTime
-			  }
+			  },
+			  isDeleted: false
 		  };
 		  return Event.find(query);
 	  })
@@ -137,7 +138,7 @@ function create(req, res) {
 			  	let eventPromises = [];
 			    
 			    var time = moment(event.startTime);
-			    for(let i = 0; i <= diff; i++) {
+			    for(let i = 0; i < diff; i++) {
 			    	eventPromises.push(Event.create({
 					    title: event.title,
 					    startTime: time.toDate()
@@ -181,7 +182,8 @@ function update(req, res) {
 		    startTime: {
 			    "$gte": eventParam.startTime,
 			    "$lt": eventParam.endTime
-		    }
+		    },
+		    isDeleted: false
 	    };
 	    return Event.find(query);
     })
